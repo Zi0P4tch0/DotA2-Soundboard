@@ -14,7 +14,6 @@
 
 @property (nonatomic,strong) IBOutlet UIBarButtonItem *addSoundboardButton;
 @property (nonatomic,strong) AFHTTPRequestOperation *downloadOperation;
-@property (nonatomic,strong) NSString *soundboardBeingDownloaded;
 
 -(void)reloadSoundboards;
 -(IBAction)addSoundboard:(id)sender;

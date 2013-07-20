@@ -30,7 +30,6 @@
 
 @synthesize addSoundboardButton;
 @synthesize downloadOperation;
-@synthesize soundboardBeingDownloaded;
 
 #pragma mark - View methods
 
@@ -128,7 +127,7 @@
         {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.mode = MBProgressHUDModeAnnularDeterminate;
-            hud.labelText = @"Downloading, please wait...";
+            hud.labelText = NSLocalizedString(@"Downloading, please wait...",nil);
             hud.progress = 0;
             
             [addSoundboardButton setEnabled:NO];
@@ -143,7 +142,6 @@
                 
                
                 NSString *output = [DOCUMENTS stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sb",refinedValue]];
-                soundboardBeingDownloaded = output;
                                                 
                 downloadOperation.outputStream = [NSOutputStream outputStreamToFileAtPath:output append:NO];
                 
@@ -185,10 +183,10 @@
                     });
                     
                     UIAlertView *alert = [[UIAlertView alloc]
-                                            initWithTitle:@"Error!"
+                                            initWithTitle:NSLocalizedString(@"Error!",nil)
                                             message:[error localizedDescription]
                                             delegate:nil
-                                            cancelButtonTitle:@"Ok"
+                                            cancelButtonTitle:NSLocalizedString(@"Dismiss",nil)
                                             otherButtonTitles: nil];
                     [alert show];
                  
@@ -200,7 +198,7 @@
         };
         
         [ActionSheetStringPicker 
-            showPickerWithTitle:@"Available Soundboards"
+            showPickerWithTitle:NSLocalizedString(@"Available Soundboards",nil)
             rows:allSoundboards
             initialSelection:0
             doneBlock:doneBlock
@@ -210,10 +208,10 @@
     else
     {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Warning"
-                              message:@"You have downloaded all the available soundboards!"
+                              initWithTitle:NSLocalizedString(@"Warning",nil)
+                              message:NSLocalizedString(@"You have downloaded all the available soundboards!",nil)
                               delegate:nil
-                              cancelButtonTitle:@"Ok"
+                              cancelButtonTitle:NSLocalizedString(@"Dismiss",nil)
                               otherButtonTitles: nil];
         [alert show];
 
@@ -276,7 +274,7 @@
     //Hero Subtitle
     UILabel *heroSubtitle = (UILabel*)[cell viewWithTag:103];
     NSDictionary *dict = [[NSFileManager defaultManager] attributesOfItemAtPath:[soundboard file] error:NULL];
-    [heroSubtitle setText:[NSString stringWithFormat:@"%d clips - Size: %.2f MB",[soundboard numberOfClips],[dict fileSize]/(float)1048576]];
+    [heroSubtitle setText:[NSString stringWithFormat:NSLocalizedString(@"%d clips - Size: %.2f MB",nil),[soundboard numberOfClips],[dict fileSize]/(float)1048576]];
     
     //Hero Image
     UIImageView *heroImageView = (UIImageView*)[cell viewWithTag:102];
