@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<soundboards>
+	<hero name="Abaddon"/>
+	<hero name="Alchemist"/>
+	<hero name="Ancient Apparition"/>
+	<hero name="Anti-Mage"/>
+	<hero name="Bane"/>
+	<hero name="Batrider"/>
+	<hero name="Beastmaster" />
+	<hero name="Bloodseeker" />
+	<hero name="Bounty Hunter" />
+	<hero name="Brewmaster" />
+	<hero name="Bristleback" />
+	<hero name="Broodmother" />
+	<hero name="Centaur Warrunner" />
+	<hero name="Chaos Knight" />
+	<hero name="Chen" />
+	<hero name="Clinkz"/>
+	<hero name="Clockwerk" />
+	<hero name="Crystal Maiden"/>
+	<hero name="Dark Seer" />
+	<hero name="Dazzle" />
+	<hero name="Death Prophet"  />
+	<hero name="Disruptor"  />
+	<hero name="Doom"  />
+	<hero name="Dragon Knight"  />
+	<hero name="Drow Ranger"  />
+	<hero name="Earthshaker"  />
+	<hero name="Elder Titan"  />
+	<hero name="Enchantress"  />
+	<hero name="Enigma"  />
+	<hero name="Faceless Void" download_link=""/>
+	<hero name="Gyrocopter" download_link=""/>
+	<hero name="Huskar" download_link=""/>
+	<hero name="Invoker" download_link=""/>
+	<hero name="Io" download_link=""/>
+	<hero name="Jakiro" download_link=""/>
+	<hero name="Juggernaut" download_link=""/>
+	<hero name="Keeper of the Light" download_link=""/>
+	<hero name="Kunkka" download_link=""/>
+	<hero name="Leshrac" download_link=""/>
+	<hero name="Lich" download_link=""/>
+	<hero name="Lifestealer" download_link=""/>
+	<hero name="Lina" download_link=""/>
+	<hero name="Lion" download_link=""/>
+	<hero name="Lone Druid" download_link=""/>
+	<hero name="Luna" download_link=""/>
+	<hero name="Lycanthrope" download_link=""/>
+	<hero name="Magnus" download_link=""/>
+	<hero name="Medusa" download_link=""/>
+	<hero name="Meepo" download_link=""/>
+	<hero name="Mirana" download_link=""/>
+	<hero name="Morphling" download_link=""/>
+	<hero name="Naga Siren" download_link=""/>
+	<hero name="Nature's Prophet" download_link=""/>
+	<hero name="Necrolyte" download_link=""/>
+	<hero name="Night Stalker" download_link=""/>
+	<hero name="Nyx Assassin" download_link=""/>
+	<hero name="Ogre Magi" download_link=""/>
+	<hero name="Omniknight" download_link=""/>
+	<hero name="Outworld Devourer" download_link=""/>
+	<hero name="Phantom Assassin" download_link=""/>
+	<hero name="Phantom Lancer" download_link=""/>
+	<hero name="Puck" download_link=""/>
+	<hero name="Pudge" download_link="https://dl.dropboxusercontent.com/u/26014957/Soundboards/Pudge.sb">
+	<hero name="Pugna" download_link=""/>
+	<hero name="Queen of Pain" download_link=""/>
+	<hero name="Razor" download_link=""/>
+	<hero name="Riki" download_link=""/>
+	<hero name="Rubick" download_link=""/>
+	<hero name="Sand King" download_link=""/>
+	<hero name="Shadow Demon" download_link=""/>
+	<hero name="Shadow Fiend" download_link=""/>
+	<hero name="Shadow Shaman" download_link=""/>
+	<hero name="Silencer" download_link=""/>
+	<hero name="Skeleton King" download_link=""/>
+	<hero name="Skywrath Mage" download_link=""/>
+	<hero name="Slardar" download_link=""/>
+	<hero name="Slark" download_link=""/>
+	<hero name="Sniper" download_link=""/>
+	<hero name="Spectre" download_link=""/>
+	<hero name="Spirit Breaker" download_link=""/>
+	<hero name="Storm Spirit" download_link=""/>
+	<hero name="Sven" download_link=""/>
+	<hero name="Templar Assassin" download_link=""/>
+	<hero name="Tidehunter" download_link=""/>
+	<hero name="Timbersaw" download_link=""/>
+	<hero name="Tinker" download_link=""/>
+	<hero name="Tiny" download_link=""/>
+	<hero name="Treant Protector" download_link=""/>
+	<hero name="Troll Warlord" download_link=""/>
+	<hero name="Tusk" download_link=""/>
+	<hero name="Undying" download_link=""/>
+	<hero name="Ursa" download_link=""/>
+	<hero name="Vengeful Spirit" download_link=""/>
+	<hero name="Venomancer" download_link=""/>
+	<hero name="Viper" download_link=""/>
+	<hero name="Visage" download_link=""/>
+	<hero name="Warlock" download_link=""/>
+	<hero name="Weaver" download_link=""/>
+	<hero name="Windrunner" download_link=""/>
+	<hero name="Witch Doctor" download_link=""/>
+	<hero name="Zeus" download_link=""/>
+</soundboards>
