@@ -18,11 +18,18 @@
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define CDN_BASE_URL @"https://dl.dropboxusercontent.com/u/26014957/Soundboards/"
 
+typedef enum {
+    
+    HEROES_XML
+    
+} XMLParserMode;
+
 @interface D2SBMasterViewController () {
     
     @private
     NSMutableArray *_heroes;
     NSMutableArray *_soundboards;
+    XMLParserMode _xmlParserMode;
 }
 @end
 
@@ -57,6 +64,7 @@
     NSString *heroesXmlPath = [[NSBundle mainBundle] pathForResource:@"heroes" ofType:@"xml"];
     NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL fileURLWithPath:heroesXmlPath]];
     xmlParser.delegate = self;
+    _xmlParserMode = HEROES_XML;
     [xmlParser parse];
     
     [self reloadSoundboards];
@@ -302,7 +310,7 @@
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    if ([elementName isEqualToString:@"hero"])
+    if ([elementName isEqualToString:@"hero"] && _xmlParserMode == HEROES_XML)
     {
         [_heroes addObject:[attributeDict valueForKey:@"name"]];
     }
