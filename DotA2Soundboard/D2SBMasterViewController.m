@@ -69,10 +69,17 @@
 {
     _soundboards = [[NSMutableArray alloc] init];
     
+    //Announcer soundboard check
+    NSString *announcerSoundboardPath = [DOCUMENTS stringByAppendingPathComponent:@"Announcer.sb"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:announcerSoundboardPath])
+    {
+        NSString *announcerSoundboardBundlePath = [[NSBundle mainBundle] pathForResource:@"Announcer" ofType:@"sb"];
+        [[NSFileManager defaultManager] copyItemAtPath:announcerSoundboardBundlePath toPath:announcerSoundboardPath error:NULL];
+    }
+    
+    
     NSArray* files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:DOCUMENTS error:NULL];
-    
-    BOOL firstStart = YES;
-    
+        
     for(NSString* file in files)
     {
         if ([[file pathExtension] isEqualToString:@"sb"])
@@ -80,7 +87,6 @@
             
             if ([Soundboard isValidSoundboard:[DOCUMENTS stringByAppendingPathComponent:file]])
             {
-                if (firstStart) firstStart = NO;
                 [_soundboards addObject:[[Soundboard alloc] initWithFile:[DOCUMENTS stringByAppendingPathComponent:file]]];
                 NSLog(@"Soundboard validated: %@",file);
             }
@@ -91,17 +97,6 @@
             }
             
         }
-    }
-    
-    //If there's no soundboard available, Axe's one gets copied.
-    if (firstStart)
-    {
-        NSString *axeSoundboard = [[NSBundle mainBundle] pathForResource:@"Axe" ofType:@"sb"];
-        NSString *copiedAxeSoundboard = [DOCUMENTS stringByAppendingPathComponent:@"Axe.sb"];
-        
-        [[NSFileManager defaultManager] copyItemAtPath:axeSoundboard toPath:copiedAxeSoundboard error:NULL];
-        
-        [_soundboards addObject:[[Soundboard alloc] initWithFile:copiedAxeSoundboard]];
     }
     
     [self.tableView reloadData];
@@ -223,8 +218,8 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //Axe is freaking untouchable! Mama, look at him!
-    if ([[[_soundboards objectAtIndex:indexPath.row] name] isEqualToString:@"Axe"])
+    //Announcer is freaking untouchable! Mama, look at him! (Axe RIP)
+    if ([[[_soundboards objectAtIndex:indexPath.row] name] isEqualToString:@"Announcer"] )
     {
         return NO;
     }

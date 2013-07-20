@@ -4,6 +4,7 @@
 	<hero name="Alchemist"/>
 	<hero name="Ancient Apparition"/>
 	<hero name="Anti-Mage"/>
+    <hero name="Axe"/>
 	<hero name="Bane"/>
 	<hero name="Batrider"/>
 	<hero name="Beastmaster" />
@@ -62,7 +63,7 @@
 	<hero name="Phantom Assassin" download_link=""/>
 	<hero name="Phantom Lancer" download_link=""/>
 	<hero name="Puck" download_link=""/>
-	<hero name="Pudge" download_link="https://dl.dropboxusercontent.com/u/26014957/Soundboards/Pudge.sb">
+	<hero name="Pudge"/>
 	<hero name="Pugna" download_link=""/>
 	<hero name="Queen of Pain" download_link=""/>
 	<hero name="Razor" download_link=""/>
