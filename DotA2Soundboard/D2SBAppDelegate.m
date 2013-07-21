@@ -8,12 +8,16 @@
 
 #import "D2SBAppDelegate.h"
 
+#import "iRate.h"
+
 @implementation D2SBAppDelegate
 
 @synthesize masterViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [iRate sharedInstance].daysUntilPrompt = 5;
+    [iRate sharedInstance].usesUntilPrompt = 15;
     
     //Delete temporary directory
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -57,7 +61,7 @@
         if (![masterViewController isSoundboardAvailable:hero])
         {
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Information", nil)
+                                  initWithTitle:NSLocalizedString(@"Info", nil)
                                   message:[NSString stringWithFormat:
                                            NSLocalizedString(@"You most download \"%@\" soundboard in order to listen to this clip!", nil),hero]
                                   delegate:nil

@@ -18,6 +18,7 @@
     NSMutableArray *_searchedClips;
     UITableViewCell *_previouslySelectedCell;
     UITableView *_activeTableView;
+    UILongPressGestureRecognizer *_lpgr;
     
 }
 
@@ -69,8 +70,35 @@
     if (requestedClip >= 0 && requestedClip <= [_clipsTitles count]-1)
     {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:requestedClip inSection:0];
-        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    }
+    
+    _lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    _lpgr.minimumPressDuration = 2;
+    [self.tableView addGestureRecognizer:_lpgr];
+}
+
+-(void)handleLongPress:(UILongPressGestureRecognizer*)recognizer{
+    
+    if (_lpgr.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint p = [_lpgr locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
+        
+        if (_activeTableView == self.searchDisplayController.searchResultsTableView)
+        {
+            indexPath = [NSIndexPath indexPathForRow: [soundboard clipIndexFromTitle:[_searchedClips objectAtIndex:indexPath.row]] inSection:0];
+        }
+        
+        NSString *urlString = [NSString stringWithFormat:@"d2sb://%@/%03d",[soundboard name],indexPath.row];
+        urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        urlString = [urlString stringByReplacingOccurrencesOfString:@"\'" withString:@"%27"];
+        
+        NSLog(@"%@",urlString);
+        
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.URL = [NSURL URLWithString:urlString];
     }
 }
 
@@ -196,7 +224,7 @@
     [cell.layer setBorderColor:[UIColor grayColor].CGColor];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+            
     return cell;
 }
 

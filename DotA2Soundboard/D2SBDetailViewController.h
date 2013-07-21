@@ -12,7 +12,7 @@
 
 #import "Soundboard.h"
 
-@interface D2SBDetailViewController : UITableViewController <UISearchBarDelegate,UISearchDisplayDelegate,AVAudioPlayerDelegate>
+@interface D2SBDetailViewController : UITableViewController <UISearchBarDelegate,UISearchDisplayDelegate,AVAudioPlayerDelegate,UIGestureRecognizerDelegate>
 
 @property (strong,nonatomic) Soundboard* soundboard;
 @property (assign,nonatomic) int requestedClip;
