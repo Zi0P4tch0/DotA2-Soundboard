@@ -7,3 +7,6 @@
 [submodule "Submodules/ActionSheetPicker"]
 	path = Submodules/ActionSheetPicker
 	url = https://github.com/TimCinel/ActionSheetPicker.git
+[submodule "Submodules/iRate"]
+	path = Submodules/iRate
+	url = https://github.com/nicklockwood/iRate.git

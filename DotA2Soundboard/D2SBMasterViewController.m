@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "ActionSheetStringPicker.h"
+#import "D2SBAppDelegate.h"
 #import "D2SBDetailViewController.h"
 #import "MBProgressHUD.h"
 #import "Soundboard.h"
@@ -37,6 +38,7 @@ typedef enum {
 
 @synthesize addSoundboardButton;
 @synthesize downloadOperation;
+@synthesize urlRequestParameters;
 
 #pragma mark - View methods
 
@@ -44,8 +46,13 @@ typedef enum {
 {
     [super viewDidLoad];
     
+    D2SBAppDelegate *appDelegate = (D2SBAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    appDelegate.masterViewController = (D2SBMasterViewController*)self;
+    
     _heroes = [[NSMutableArray alloc] init];
     _soundboards = [[NSMutableArray alloc] init];
+    urlRequestParameters = nil;
     
         
     if ([[UIScreen mainScreen] bounds].size.height == 568.0f)
@@ -68,7 +75,28 @@ typedef enum {
     [xmlParser parse];
     
     [self reloadSoundboards];
-	
+    	
+}
+
+-(BOOL)heroExists:(NSString*)heroName
+{
+    if ([heroName isEqualToString:@"Announcer"])
+    {
+        return YES;
+    }
+    return [_heroes containsObject:heroName];
+}
+
+-(BOOL)isSoundboardAvailable:(NSString*)heroName
+{
+    for (Soundboard *s in _soundboards)
+    {
+        if ([[s name] isEqualToString:heroName])
+        {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 #pragma mark - Soundboards-related methods
@@ -302,7 +330,29 @@ typedef enum {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
         D2SBDetailViewController *destinationViewController = [segue destinationViewController];
-        destinationViewController.soundboard = _soundboards[indexPath.row];
+        
+        if (urlRequestParameters)
+        {
+            Soundboard *s;
+            
+            for(Soundboard *_s in _soundboards)
+            {
+                if ([[_s name] isEqualToString:[urlRequestParameters objectAtIndex:0]])
+                {
+                    s = _s;
+                }
+            }
+            
+            destinationViewController.soundboard = s;
+            destinationViewController.requestedClip = (int)[[urlRequestParameters objectAtIndex:1] unsignedIntegerValue];
+            
+            urlRequestParameters = nil;
+        }
+        else
+        {
+            destinationViewController.soundboard = _soundboards[indexPath.row];
+            destinationViewController.requestedClip = -1;
+        }
     }
 }
 

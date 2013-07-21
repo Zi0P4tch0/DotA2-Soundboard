@@ -30,7 +30,7 @@
         <!--Master View Controller - Master-->
         <scene sceneID="18">
             <objects>
-                <tableViewController storyboardIdentifier="" title="Master" id="12" customClass="D2SBMasterViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Master" title="Master" useStoryboardIdentifierAsRestorationIdentifier="YES" id="12" customClass="D2SBMasterViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="53" sectionHeaderHeight="22" sectionFooterHeight="22" id="13">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -103,18 +103,13 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17" sceneMemberID="firstResponder"/>
-                <customObject id="N9w-gc-hgZ" customClass="D2SBAppDelegate">
-                    <connections>
-                        <outlet property="masterViewController" destination="12" id="EfW-c0-FD9"/>
-                    </connections>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="91" y="-18"/>
         </scene>
         <!--Detail View Controller - Detail-->
         <scene sceneID="g69-Zo-8QA">
             <objects>
-                <tableViewController storyboardIdentifier="" title="Detail" id="f6A-EF-P9g" customClass="D2SBDetailViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Detail" title="Detail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f6A-EF-P9g" customClass="D2SBDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZlP-4s-zyH">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -188,12 +183,6 @@
         </scene>
     </scenes>
     <classes>
-        <class className="D2SBAppDelegate" superclassName="UIResponder">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/D2SBAppDelegate.h"/>
-            <relationships>
-                <relationship kind="outlet" name="masterViewController" candidateClass="D2SBMasterViewController"/>
-            </relationships>
-        </class>
         <class className="D2SBDetailViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/D2SBDetailViewController.h"/>
         </class>

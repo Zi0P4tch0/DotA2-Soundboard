@@ -23,8 +23,61 @@
         [fileManager removeItemAtPath:file error:NULL];
     }
     
-    
     return YES;
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSString *urlString = [url absoluteString];
+    
+    if ([urlString hasPrefix:@"d2sb://"])
+    {
+        NSArray *urlTokens = [urlString componentsSeparatedByString:@"/"];
+        
+        if ([urlTokens count] != 4) return NO;
+        
+        NSString *hero = [[urlTokens objectAtIndex:2] stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
+        hero =[hero stringByReplacingOccurrencesOfString:@"%27" withString:@"\'"];
+        NSUInteger clipNumber = (NSUInteger)[[urlTokens objectAtIndex:3] integerValue];
+        
+        if (![masterViewController heroExists:hero])
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Error!", nil)
+                                  message:[NSString stringWithFormat:
+                                           NSLocalizedString(@"Hero \"%@\" doesn't exist!", nil),hero]
+                                  delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                  otherButtonTitles:nil];
+            [alert show];
+            
+            return NO;
+        }
+        
+        if (![masterViewController isSoundboardAvailable:hero])
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Information", nil)
+                                  message:[NSString stringWithFormat:
+                                           NSLocalizedString(@"You most download \"%@\" soundboard in order to listen to this clip!", nil),hero]
+                                  delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                  otherButtonTitles:nil];
+            [alert show];
+            
+            return NO;
+        }
+        
+        masterViewController.urlRequestParameters = [[NSMutableArray alloc] initWithCapacity:2];
+        [masterViewController.urlRequestParameters addObject:hero];
+        [masterViewController.urlRequestParameters addObject:[NSNumber numberWithUnsignedInteger:clipNumber]];
+        
+        [masterViewController performSegueWithIdentifier:@"detail" sender:self];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

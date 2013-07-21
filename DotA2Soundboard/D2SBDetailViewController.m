@@ -23,6 +23,7 @@
 
 @synthesize soundboard;
 @synthesize player;
+@synthesize requestedClip;
 
 #pragma mark - View methods
 
@@ -65,6 +66,12 @@
         [_clipsTitles addObject:[soundboard clipTitleAtIndex:i]];
     }
     
+    if (requestedClip >= 0 && requestedClip <= [_clipsTitles count]-1)
+    {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:requestedClip inSection:0];
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+        [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - AVAudioPlayer delegate methods

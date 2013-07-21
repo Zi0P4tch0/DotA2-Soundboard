@@ -15,6 +15,7 @@
 @interface D2SBDetailViewController : UITableViewController <UISearchBarDelegate,UISearchDisplayDelegate,AVAudioPlayerDelegate>
 
 @property (strong,nonatomic) Soundboard* soundboard;
+@property (assign,nonatomic) int requestedClip;
 @property (strong,nonatomic) AVAudioPlayer* player;
 
 @end
