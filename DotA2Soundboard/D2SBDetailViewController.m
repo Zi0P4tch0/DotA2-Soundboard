@@ -11,6 +11,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "MBProgressHUD.h"
+
 @implementation D2SBDetailViewController {
     
     @private
@@ -99,6 +101,13 @@
         
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.URL = [NSURL URLWithString:urlString];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.opacity = 0.5f;
+        hud.labelText = NSLocalizedString(@"Link copied to clipboard.",nil);
+        
+        [hud hide:YES afterDelay:2];
     }
 }
 
