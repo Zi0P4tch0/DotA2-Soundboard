@@ -10,3 +10,6 @@
 [submodule "Submodules/iRate"]
 	path = Submodules/iRate
 	url = https://github.com/nicklockwood/iRate.git
+[submodule "Submodules/BlockAlertsAnd-ActionSheets"]
+	path = Submodules/BlockAlertsAnd-ActionSheets
+	url = https://github.com/falkobuttler/BlockAlertsAnd-ActionSheets.git

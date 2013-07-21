@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "ActionSheetStringPicker.h"
+#import "BlockAlertView.h"
 #import "D2SBAppDelegate.h"
 #import "D2SBDetailViewController.h"
 #import "MBProgressHUD.h"
@@ -152,7 +153,7 @@ typedef enum {
     
     [allSoundboards removeObjectsInArray:installedSoundboards];
     
-    if ([allSoundboards count])
+    if (![allSoundboards count])
     {
         ActionStringDoneBlock doneBlock = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue)
         {
@@ -213,12 +214,13 @@ typedef enum {
                         
                     });
                     
-                    UIAlertView *alert = [[UIAlertView alloc]
-                                            initWithTitle:NSLocalizedString(@"Error!",nil)
-                                            message:[error localizedDescription]
-                                            delegate:nil
-                                            cancelButtonTitle:NSLocalizedString(@"Dismiss",nil)
-                                            otherButtonTitles: nil];
+                    
+                    BlockAlertView *alert = [[BlockAlertView alloc]
+                                            initWithTitle:NSLocalizedString(@"Download Error!",nil)
+                                             message:[error localizedDescription]];
+                    
+                    [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+                                            
                     [alert show];
                  
                 }];
@@ -238,12 +240,12 @@ typedef enum {
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Warning",nil)
-                              message:NSLocalizedString(@"You have downloaded all the available soundboards!",nil)
-                              delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"Dismiss",nil)
-                              otherButtonTitles: nil];
+        BlockAlertView *alert = [[BlockAlertView alloc]
+                                 initWithTitle:NSLocalizedString(@"Warning",nil)
+                                 message:NSLocalizedString(@"You have downloaded all the available soundboards!",nil)];
+        
+        [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+        
         [alert show];
 
     }

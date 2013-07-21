@@ -8,6 +8,7 @@
 
 #import "D2SBAppDelegate.h"
 
+#import "BlockAlertView.h"
 #import "iRate.h"
 
 @implementation D2SBAppDelegate
@@ -46,13 +47,12 @@
         
         if (![masterViewController heroExists:hero])
         {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Error!", nil)
-                                  message:[NSString stringWithFormat:
-                                           NSLocalizedString(@"Hero \"%@\" doesn't exist!", nil),hero]
-                                  delegate:nil
-                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                  otherButtonTitles:nil];
+            BlockAlertView *alert = [[BlockAlertView alloc]
+                                     initWithTitle:NSLocalizedString(@"Error!", nil)
+                                     message:[NSString stringWithFormat:NSLocalizedString(@"Hero \"%@\" doesn't exist!", nil),hero]];
+            
+            [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+            
             [alert show];
             
             return NO;
@@ -60,13 +60,16 @@
         
         if (![masterViewController isSoundboardAvailable:hero])
         {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Info", nil)
-                                  message:[NSString stringWithFormat:
-                                           NSLocalizedString(@"You most download \"%@\" soundboard in order to listen to this clip!", nil),hero]
-                                  delegate:nil
-                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                  otherButtonTitles:nil];
+            NSString *msg = [NSString stringWithFormat:
+                             NSLocalizedString(@"You must download \"%@\" soundboard in order to listen to this clip!", nil),hero];
+            
+            BlockAlertView *alert = [[BlockAlertView alloc]
+                                     initWithTitle:NSLocalizedString(@"Info", nil)
+                                     message:msg];
+            
+            [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+            [alert addButtonWithTitle:NSLocalizedString(@"Download", nil) imageIdentifier:@"red" block:^(){}];
+            
             [alert show];
             
             return NO;
