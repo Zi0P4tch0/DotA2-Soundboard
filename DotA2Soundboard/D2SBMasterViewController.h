@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "AFNetworking.h"
+#import "MYIntroductionView.h"
 
-@interface D2SBMasterViewController : UITableViewController <NSXMLParserDelegate>
+@interface D2SBMasterViewController : UITableViewController <NSXMLParserDelegate,MYIntroductionDelegate>
 
 @property (nonatomic,strong) IBOutlet UIBarButtonItem *addSoundboardButton;
 @property (nonatomic,strong) AFHTTPRequestOperation *downloadOperation;

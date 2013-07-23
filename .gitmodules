@@ -13,3 +13,6 @@
 [submodule "Submodules/BlockAlertsAnd-ActionSheets"]
 	path = Submodules/BlockAlertsAnd-ActionSheets
 	url = https://github.com/falkobuttler/BlockAlertsAnd-ActionSheets.git
+[submodule "Submodules/iPhone-IntroductionTutorial"]
+	path = Submodules/iPhone-IntroductionTutorial
+	url = https://github.com/staxmanade/iPhone-IntroductionTutorial.git

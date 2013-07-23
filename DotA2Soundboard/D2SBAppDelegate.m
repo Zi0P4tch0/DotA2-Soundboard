@@ -20,7 +20,7 @@
     [iRate sharedInstance].daysUntilPrompt = 5;
     [iRate sharedInstance].usesUntilPrompt = 15;
     
-    //Delete temporary directory
+    //Delete temporary files
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *tmpFiles = [fileManager contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
     for (NSString *file in tmpFiles)

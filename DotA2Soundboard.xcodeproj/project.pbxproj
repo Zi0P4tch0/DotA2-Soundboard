@@ -31,6 +31,8 @@
 		9563EE1B1799BD830003742A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9563EE1A1799BD830003742A /* CFNetwork.framework */; };
 		9563EE1D1799BD870003742A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9563EE1C1799BD870003742A /* Security.framework */; };
 		9565AA2A1799B09400DEE611 /* heroes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9565AA291799B09400DEE611 /* heroes.xml */; };
+		95674657179CBEB9002C8710 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95674654179CBEB9002C8710 /* MYIntroductionPanel.m */; };
+		95674658179CBEB9002C8710 /* MYIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95674656179CBEB9002C8710 /* MYIntroductionView.m */; };
 		95A7A760179A1267005C0035 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A7A75E179A1267005C0035 /* background.png */; };
 		95A7A761179A1267005C0035 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A7A75F179A1267005C0035 /* background@2x.png */; };
 		95A7A767179A1860005C0035 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A7A766179A1860005C0035 /* QuartzCore.framework */; };
@@ -136,6 +138,10 @@
 		9563EE1A1799BD830003742A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		9563EE1C1799BD870003742A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9565AA291799B09400DEE611 /* heroes.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = heroes.xml; sourceTree = "<group>"; };
+		95674653179CBEB9002C8710 /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MYIntroductionPanel.h; path = "Submodules/iPhone-IntroductionTutorial/IntroductionExample/MYIntroductionPanel.h"; sourceTree = SOURCE_ROOT; };
+		95674654179CBEB9002C8710 /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MYIntroductionPanel.m; path = "Submodules/iPhone-IntroductionTutorial/IntroductionExample/MYIntroductionPanel.m"; sourceTree = SOURCE_ROOT; };
+		95674655179CBEB9002C8710 /* MYIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MYIntroductionView.h; path = "Submodules/iPhone-IntroductionTutorial/IntroductionExample/MYIntroductionView.h"; sourceTree = SOURCE_ROOT; };
+		95674656179CBEB9002C8710 /* MYIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MYIntroductionView.m; path = "Submodules/iPhone-IntroductionTutorial/IntroductionExample/MYIntroductionView.m"; sourceTree = SOURCE_ROOT; };
 		95A7A75E179A1267005C0035 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = DotA2Soundboard/background.png; sourceTree = "<group>"; };
 		95A7A75F179A1267005C0035 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background@2x.png"; path = "DotA2Soundboard/background@2x.png"; sourceTree = "<group>"; };
 		95A7A766179A1860005C0035 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -283,6 +289,7 @@
 				95383BE317984F2700745084 /* D2SBMasterViewController.m */,
 				95383BE517984F2700745084 /* D2SBDetailViewController.h */,
 				95383BE617984F2700745084 /* D2SBDetailViewController.m */,
+				9567465A179CBEC0002C8710 /* iPhone-IntroductionTutorial */,
 				95D22587179C7E4300639253 /* BlockAlertsAnd-ActionSheets */,
 				9533E497179BDF300042473A /* iRate */,
 				951E70EA179ACEF100E50E06 /* ActionSheetPicker */,
@@ -346,6 +353,17 @@
 				95D83231179B02130062A6DF /* UIImageView+AFNetworking.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		9567465A179CBEC0002C8710 /* iPhone-IntroductionTutorial */ = {
+			isa = PBXGroup;
+			children = (
+				95674653179CBEB9002C8710 /* MYIntroductionPanel.h */,
+				95674654179CBEB9002C8710 /* MYIntroductionPanel.m */,
+				95674655179CBEB9002C8710 /* MYIntroductionView.h */,
+				95674656179CBEB9002C8710 /* MYIntroductionView.m */,
+			);
+			name = "iPhone-IntroductionTutorial";
 			sourceTree = "<group>";
 		};
 		95A7A765179A15AD005C0035 /* Graphics */ = {
@@ -556,6 +574,8 @@
 				95D22584179C7E3F00639253 /* BlockBackground.m in Sources */,
 				95D22585179C7E3F00639253 /* BlockTableAlertView.m in Sources */,
 				95D22586179C7E3F00639253 /* BlockTextPromptAlertView.m in Sources */,
+				95674657179CBEB9002C8710 /* MYIntroductionPanel.m in Sources */,
+				95674658179CBEB9002C8710 /* MYIntroductionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

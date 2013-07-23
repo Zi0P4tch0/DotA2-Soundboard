@@ -76,7 +76,43 @@ typedef enum {
     [xmlParser parse];
     
     [self reloadSoundboards];
-    	
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL tutorialShown = [defaults boolForKey:@"tutorialShown"];
+    
+    if (tutorialShown)
+    {
+        [addSoundboardButton setEnabled:NO];
+        
+        MYIntroductionPanel *panelOne = [[MYIntroductionPanel alloc]
+                                         initWithimage:nil
+                                         title:@"Welcome!"
+                                         description:@"This simple tutorial will help you with this amazing soundboard!\n\nSwipe from right lo left to begin..."];
+    
+        MYIntroductionPanel *panelTwo = [[MYIntroductionPanel alloc]
+                                         initWithimage:nil
+                                         title:@"Heroes"
+                                         description:@"There's a soundboard for each hero. As you can see, there's only one soundboard in the app right now (\"Announcer\", the default one).\n\nIn order to download an additional soundboard, you must tap the PLUS button, located in the upper right corner.\n\nSwipe from right to left to continue..."];
+    
+        MYIntroductionView *introductionView = [[MYIntroductionView alloc]
+                                                initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+                                                headerImage:nil
+                                                panels:@[panelOne,panelTwo]];
+        
+        introductionView.delegate = self;
+    
+        [introductionView showInView:self.view];
+        
+        [defaults setBool:YES forKey:@"tutorialShown"];
+        [defaults synchronize];
+        
+    }
+    
+}
+
+-(void)introductionDidFinishWithType:(MYFinishType)finishType
+{
+    [addSoundboardButton setEnabled:YES];
 }
 
 -(BOOL)heroExists:(NSString*)heroName
@@ -153,7 +189,7 @@ typedef enum {
     
     [allSoundboards removeObjectsInArray:installedSoundboards];
     
-    if (![allSoundboards count])
+    if ([allSoundboards count])
     {
         ActionStringDoneBlock doneBlock = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue)
         {
