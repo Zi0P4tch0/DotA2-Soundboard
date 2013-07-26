@@ -10,13 +10,38 @@
 
 #import "BlockAlertView.h"
 #import "iRate.h"
+#import "TestFlight.h"
+
+#define NSLog TFLog
 
 @implementation D2SBAppDelegate
 
 @synthesize masterViewController;
 
+void HandleExceptions(NSException *exception) {
+    
+    NSArray *backtrace = [exception callStackSymbols];
+    NSLog(@"Exception occurred. Backtrace:\n%@",backtrace);
+}
+
+void SignalHandler(int sig) {
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //TestFlight exception handler
+    NSSetUncaughtExceptionHandler(&HandleExceptions);
+    struct sigaction newSignalAction;
+    memset(&newSignalAction, 0, sizeof(newSignalAction));
+    newSignalAction.sa_handler = &SignalHandler;
+    sigaction(SIGABRT, &newSignalAction, NULL);
+    sigaction(SIGILL, &newSignalAction, NULL);
+    sigaction(SIGBUS, &newSignalAction, NULL);
+    
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    [TestFlight takeOff:@"659ef634-3c4a-4585-946a-c08503f14f6a"];
+    
     [iRate sharedInstance].daysUntilPrompt = 5;
     [iRate sharedInstance].usesUntilPrompt = 15;
     
@@ -27,7 +52,7 @@
     {
         [fileManager removeItemAtPath:file error:NULL];
     }
-    
+        
     return YES;
 }
 

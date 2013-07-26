@@ -33,6 +33,7 @@
 		9565AA2A1799B09400DEE611 /* heroes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9565AA291799B09400DEE611 /* heroes.xml */; };
 		95674657179CBEB9002C8710 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95674654179CBEB9002C8710 /* MYIntroductionPanel.m */; };
 		95674658179CBEB9002C8710 /* MYIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95674656179CBEB9002C8710 /* MYIntroductionView.m */; };
+		956B21F717A3117F00EF6130 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 956B21F617A3117F00EF6130 /* libz.dylib */; };
 		95A7A760179A1267005C0035 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A7A75E179A1267005C0035 /* background.png */; };
 		95A7A761179A1267005C0035 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A7A75F179A1267005C0035 /* background@2x.png */; };
 		95A7A767179A1860005C0035 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A7A766179A1860005C0035 /* QuartzCore.framework */; };
@@ -76,13 +77,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 95383B8717984E9400745084;
 			remoteInfo = Soundboard;
-		};
-		95383BF417984F3D00745084 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95383BED17984F3D00745084 /* Soundboard.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 95383B9817984E9400745084;
-			remoteInfo = SoundboardTests;
 		};
 		95383BF617984F4A00745084 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -142,6 +136,7 @@
 		95674654179CBEB9002C8710 /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MYIntroductionPanel.m; path = "Submodules/iPhone-IntroductionTutorial/IntroductionExample/MYIntroductionPanel.m"; sourceTree = SOURCE_ROOT; };
 		95674655179CBEB9002C8710 /* MYIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MYIntroductionView.h; path = "Submodules/iPhone-IntroductionTutorial/IntroductionExample/MYIntroductionView.h"; sourceTree = SOURCE_ROOT; };
 		95674656179CBEB9002C8710 /* MYIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MYIntroductionView.m; path = "Submodules/iPhone-IntroductionTutorial/IntroductionExample/MYIntroductionView.m"; sourceTree = SOURCE_ROOT; };
+		956B21F617A3117F00EF6130 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		95A7A75E179A1267005C0035 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = DotA2Soundboard/background.png; sourceTree = "<group>"; };
 		95A7A75F179A1267005C0035 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background@2x.png"; path = "DotA2Soundboard/background@2x.png"; sourceTree = "<group>"; };
 		95A7A766179A1860005C0035 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -202,6 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				956B21F717A3117F00EF6130 /* libz.dylib in Frameworks */,
 				9533E499179BE0000042473A /* StoreKit.framework in Frameworks */,
 				954CCE8A179B03910044477C /* libMBProgressHUD.a in Frameworks */,
 				95A7A767179A1860005C0035 /* QuartzCore.framework in Frameworks */,
@@ -263,6 +259,7 @@
 		95383BC617984F2700745084 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				956B21F617A3117F00EF6130 /* libz.dylib */,
 				9533E498179BE0000042473A /* StoreKit.framework */,
 				95A7A766179A1860005C0035 /* QuartzCore.framework */,
 				9563EE1C1799BD870003742A /* Security.framework */,
@@ -315,7 +312,6 @@
 			isa = PBXGroup;
 			children = (
 				95383BF317984F3D00745084 /* libSoundboard.a */,
-				95383BF517984F3D00745084 /* SoundboardTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -497,13 +493,6 @@
 			remoteRef = 95383BF217984F3D00745084 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		95383BF517984F3D00745084 /* SoundboardTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SoundboardTests.octest;
-			remoteRef = 95383BF417984F3D00745084 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		95D8321E179B01DD0062A6DF /* libMBProgressHUD.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -677,9 +666,10 @@
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				OTHER_LDFLAGS = "";
+				LIBRARY_SEARCH_PATHS = /Users/matteo/Desktop/testflight;
+				OTHER_LDFLAGS = "-lTestFlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/MBProgressHUD";
+				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/MBProgressHUD /Users/matteo/Desktop/testflight";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -691,9 +681,10 @@
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				OTHER_LDFLAGS = "";
+				LIBRARY_SEARCH_PATHS = /Users/matteo/Desktop/testflight;
+				OTHER_LDFLAGS = "-lTestFlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/MBProgressHUD";
+				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/MBProgressHUD /Users/matteo/Desktop/testflight";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

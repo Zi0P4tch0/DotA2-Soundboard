@@ -16,6 +16,7 @@
 #import "D2SBDetailViewController.h"
 #import "MBProgressHUD.h"
 #import "Soundboard.h"
+#import "TestFlight.h"
 
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define CDN_BASE_URL @"https://dl.dropboxusercontent.com/u/26014957/Soundboards/"
