@@ -85,6 +85,8 @@
     
     if (_lpgr.state == UIGestureRecognizerStateBegan)
     {
+        NSLog(@"Long press detected ");
+        
         CGPoint p = [_lpgr locationInView:self.tableView];
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
         
@@ -101,6 +103,8 @@
         
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.URL = [NSURL URLWithString:urlString];
+        
+        NSLog(@"Clip URL copied to clipboard: \"%@\".",urlString);
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
@@ -150,10 +154,18 @@
     {
         
         clipData = [soundboard clipDataFromClipAtIndex:[soundboard clipIndexFromTitle:[_searchedClips objectAtIndex:indexPath.row]]];
+        NSLog(@"Playing clip \"%@\"(index %d) of soundboard \"%@\"...",
+              [_searchedClips objectAtIndex:indexPath.row],
+              [soundboard clipIndexFromTitle:[_searchedClips objectAtIndex:indexPath.row]],
+              [soundboard name]);
     }
     else
     {
         clipData = [soundboard clipDataFromClipAtIndex:indexPath.row];
+        NSLog(@"Playing clip \"%@\"(index %d) of soundboard \"%@\"...",
+              [_clipsTitles objectAtIndex:indexPath.row],
+              indexPath.row,
+              [soundboard name]);
     }
     
     if (player && [player isPlaying])

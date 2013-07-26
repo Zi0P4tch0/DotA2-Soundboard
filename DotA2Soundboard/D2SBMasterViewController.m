@@ -16,7 +16,6 @@
 #import "D2SBDetailViewController.h"
 #import "MBProgressHUD.h"
 #import "Soundboard.h"
-#import "TestFlight.h"
 
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define CDN_BASE_URL @"https://dl.dropboxusercontent.com/u/26014957/Soundboards/"
@@ -81,8 +80,10 @@ typedef enum {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL tutorialShown = [defaults boolForKey:@"tutorialShown"];
     
-    if (tutorialShown)
+    if (!tutorialShown)
     {
+        NSLog(@"Showing tutorial / Disabling addSoundboard button");
+        
         [addSoundboardButton setEnabled:NO];
         
         MYIntroductionPanel *panelOne = [[MYIntroductionPanel alloc]
@@ -113,6 +114,10 @@ typedef enum {
         [defaults synchronize];
         
     }
+    else
+    {
+        NSLog(@"No need to show tutorial");
+    }
     
 }
 
@@ -120,6 +125,8 @@ typedef enum {
 
 -(void)introductionDidFinishWithType:(MYFinishType)finishType
 {
+    NSLog(@"End of tutorial / Enabling addSoundboard button");
+    
     [addSoundboardButton setEnabled:YES];
 }
 
@@ -154,6 +161,7 @@ typedef enum {
     NSString *announcerSoundboardPath = [DOCUMENTS stringByAppendingPathComponent:@"Announcer.sb"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:announcerSoundboardPath])
     {
+        NSLog(@"Copying \"Announcer.sb\" to DOCUMENTS");
         NSString *announcerSoundboardBundlePath = [[NSBundle mainBundle] pathForResource:@"Announcer" ofType:@"sb"];
         [[NSFileManager defaultManager] copyItemAtPath:announcerSoundboardBundlePath toPath:announcerSoundboardPath error:NULL];
     }
@@ -185,6 +193,8 @@ typedef enum {
 
 -(void)downloadSoundboard:(NSString*)name
 {
+    NSLog(@"Downloading soudboard for hero \"%@\"...",name);
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeAnnularDeterminate;
     hud.labelText = NSLocalizedString(@"Downloading, please wait...",nil);
@@ -221,6 +231,8 @@ typedef enum {
             //SUCCESS
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                NSLog(@"Soundboard \"%@\" successfully downloaded!",[NSString stringWithFormat:@"%@.sb",refinedValue]);
+                
                 [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                 [weakSelf reloadSoundboards];
                 [weakSelf.addSoundboardButton setEnabled:YES];
@@ -243,6 +255,7 @@ typedef enum {
                 
             });
             
+            NSLog(@"Error while downloading soundboard \"%@\": \"%@\"!",[NSString stringWithFormat:@"%@.sb",refinedValue],[error localizedDescription]);
             
             BlockAlertView *alert = [[BlockAlertView alloc]
                                      initWithTitle:NSLocalizedString(@"Download Error!",nil)
@@ -263,6 +276,8 @@ typedef enum {
 
 -(IBAction)addSoundboard:(id)sender
 {
+    [TestFlight passCheckpoint:@"ADD_SOUNDBOARD"];
+    
     NSMutableArray *allSoundboards = [_heroes mutableCopy];
     
     NSMutableArray *installedSoundboards = [[NSMutableArray alloc] init];
@@ -322,6 +337,7 @@ typedef enum {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         NSString *targetSoundboard = [[_soundboards objectAtIndex:indexPath.row] file];
+        NSLog(@"User deleted \"%@\" soundboard.",targetSoundboard);
         
         [[NSFileManager defaultManager] removeItemAtPath:targetSoundboard error:NULL];
                 

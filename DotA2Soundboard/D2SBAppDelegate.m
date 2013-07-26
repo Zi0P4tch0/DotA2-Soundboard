@@ -10,9 +10,6 @@
 
 #import "BlockAlertView.h"
 #import "iRate.h"
-#import "TestFlight.h"
-
-#define NSLog TFLog
 
 @implementation D2SBAppDelegate
 
@@ -50,6 +47,7 @@ void SignalHandler(int sig) {
     NSArray *tmpFiles = [fileManager contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
     for (NSString *file in tmpFiles)
     {
+        NSLog(@"Deleting temporary file: \"%@\"...",file);
         [fileManager removeItemAtPath:file error:NULL];
     }
         
@@ -62,6 +60,9 @@ void SignalHandler(int sig) {
     
     if ([urlString hasPrefix:@"d2sb://"])
     {
+        [TestFlight passCheckpoint:@"URL_OPEN"];
+        NSLog(@"Opening URL: \"%@\".",urlString);
+        
         NSArray *urlTokens = [urlString componentsSeparatedByString:@"/"];
         
         if ([urlTokens count] != 4) return NO;
@@ -120,6 +121,7 @@ void SignalHandler(int sig) {
 {
     if ([[masterViewController downloadOperation] isExecuting])
     {
+        NSLog(@"Pausing download");
         [[masterViewController downloadOperation] pause];
     }
 }
@@ -139,6 +141,7 @@ void SignalHandler(int sig) {
 {
     if ([[masterViewController downloadOperation] isPaused])
     {
+        NSLog(@"Resuming download");
         [[masterViewController downloadOperation] resume];
     }
 }
