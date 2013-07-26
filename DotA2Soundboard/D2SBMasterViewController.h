@@ -19,6 +19,7 @@
 
 -(void)reloadSoundboards;
 -(IBAction)addSoundboard:(id)sender;
+-(void)downloadSoundboard:(NSString*)name;
 
 -(BOOL)heroExists:(NSString*)heroName;
 -(BOOL)isSoundboardAvailable:(NSString*)heroName;

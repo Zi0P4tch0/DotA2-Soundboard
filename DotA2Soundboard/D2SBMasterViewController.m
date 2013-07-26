@@ -87,20 +87,25 @@ typedef enum {
         MYIntroductionPanel *panelOne = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
                                          title:@"Welcome!"
-                                         description:@"This simple tutorial will help you with this amazing soundboard!\n\nSwipe from right lo left to begin..."];
+                                         description:@"This simple tutorial will teach you how to use this amazing soundboard!"];
     
         MYIntroductionPanel *panelTwo = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
                                          title:@"Heroes"
-                                         description:@"There's a soundboard for each hero. As you can see, there's only one soundboard in the app right now (\"Announcer\", the default one).\n\nIn order to download an additional soundboard, you must tap the PLUS button, located in the upper right corner.\n\nSwipe from right to left to continue..."];
+                                         description:@"There's a soundboard for each hero. As you can see, there's only one soundboard in the app right now (\"Announcer\", the default one).\n\nIn order to download an additional soundboard, you must tap the PLUS button, located in the upper right corner."];
+        
+        MYIntroductionPanel *panelThree = [[MYIntroductionPanel alloc]
+                                         initWithimage:nil
+                                         title:@"That's it!"
+                                         description:@"Click on a soundboard to open it.\nA list of the available clips will be shown.\n\nSearch a clip by scrolling down the list or using the top search bar. To share a clip, just hold your finger on it for 2 seconds."];
     
         MYIntroductionView *introductionView = [[MYIntroductionView alloc]
                                                 initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
                                                 headerImage:nil
-                                                panels:@[panelOne,panelTwo]];
+                                                panels:@[panelOne,panelTwo,panelThree]];
         
         introductionView.delegate = self;
-    
+                
         [introductionView showInView:self.view];
         
         [defaults setBool:YES forKey:@"tutorialShown"];
@@ -109,6 +114,8 @@ typedef enum {
     }
     
 }
+
+#pragma mark - Introduction view methods
 
 -(void)introductionDidFinishWithType:(MYFinishType)finishType
 {
@@ -175,6 +182,83 @@ typedef enum {
     [self.tableView reloadData];
 }
 
+-(void)downloadSoundboard:(NSString*)name
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = NSLocalizedString(@"Downloading, please wait...",nil);
+    hud.progress = 0;
+    
+    [addSoundboardButton setEnabled:NO];
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        
+        NSString *refinedValue = [name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        NSString *downloadUrl = [NSString stringWithFormat:@"%@%@.sb",CDN_BASE_URL,refinedValue];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadUrl]];
+        downloadOperation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+        
+        
+        NSString *output = [DOCUMENTS stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sb",refinedValue]];
+        
+        downloadOperation.outputStream = [NSOutputStream outputStreamToFileAtPath:output append:NO];
+        
+        [downloadOperation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long expectedSize) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [hud setProgress:(float)totalBytesRead/(float)expectedSize];
+                
+            });
+            
+        }];
+        
+        __unsafe_unretained typeof(self) weakSelf = self;
+        [downloadOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            //SUCCESS
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                [weakSelf reloadSoundboards];
+                [weakSelf.addSoundboardButton setEnabled:YES];
+                
+            });
+            
+        } failure:^(AFHTTPRequestOperation *op, NSError *error) {
+            
+            
+            //FAILURE
+            if ([[NSFileManager defaultManager] fileExistsAtPath:output])
+            {
+                [[NSFileManager defaultManager] removeItemAtPath:output error:NULL];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                [weakSelf.addSoundboardButton setEnabled:YES];
+                
+            });
+            
+            
+            BlockAlertView *alert = [[BlockAlertView alloc]
+                                     initWithTitle:NSLocalizedString(@"Download Error!",nil)
+                                     message:[error localizedDescription]];
+            
+            [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+            
+            [alert show];
+            
+        }];
+        [downloadOperation start];
+    });
+    
+    
+}
+
+
 
 -(IBAction)addSoundboard:(id)sender
 {
@@ -193,78 +277,9 @@ typedef enum {
     {
         ActionStringDoneBlock doneBlock = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue)
         {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.mode = MBProgressHUDModeAnnularDeterminate;
-            hud.labelText = NSLocalizedString(@"Downloading, please wait...",nil);
-            hud.progress = 0;
-            
-            [addSoundboardButton setEnabled:NO];
-            
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                
-                NSString *refinedValue = [selectedValue stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-                NSString *downloadUrl = [NSString stringWithFormat:@"%@%@.sb",CDN_BASE_URL,refinedValue];
-
-                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadUrl]];
-                downloadOperation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
-                
-               
-                NSString *output = [DOCUMENTS stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sb",refinedValue]];
-                                                
-                downloadOperation.outputStream = [NSOutputStream outputStreamToFileAtPath:output append:NO];
-                
-                [downloadOperation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long expectedSize) {
-                                        
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [hud setProgress:(float)totalBytesRead/(float)expectedSize];
-                        
-                    });
-                    
-                }];
-                __unsafe_unretained typeof(self) weakSelf = self;
-                [downloadOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                        
-                    //SUCCESS
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                        [weakSelf reloadSoundboards];
-                        [weakSelf.addSoundboardButton setEnabled:YES];
-                        
-                    });
-                    
-                } failure:^(AFHTTPRequestOperation *op, NSError *error) {
-                    
-                    
-                    //FAILURE
-                    if ([[NSFileManager defaultManager] fileExistsAtPath:output])
-                    {
-                        [[NSFileManager defaultManager] removeItemAtPath:output error:NULL];
-                    }
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                        [weakSelf.addSoundboardButton setEnabled:YES];
-                        
-                    });
-                    
-                    
-                    BlockAlertView *alert = [[BlockAlertView alloc]
-                                            initWithTitle:NSLocalizedString(@"Download Error!",nil)
-                                             message:[error localizedDescription]];
-                    
-                    [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
-                                            
-                    [alert show];
-                 
-                }];
-                [downloadOperation start];
-
-            });
-           
+            [self downloadSoundboard:selectedValue];
         };
+        
         
         [ActionSheetStringPicker 
             showPickerWithTitle:NSLocalizedString(@"Available Soundboards",nil)
@@ -273,6 +288,7 @@ typedef enum {
             doneBlock:doneBlock
             cancelBlock:nil
             origin:sender];
+            
     }
     else
     {

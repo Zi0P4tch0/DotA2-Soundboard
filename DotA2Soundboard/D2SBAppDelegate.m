@@ -67,8 +67,12 @@
                                      initWithTitle:NSLocalizedString(@"Info", nil)
                                      message:msg];
             
+            [alert addButtonWithTitle:NSLocalizedString(@"Download", nil) imageIdentifier:@"red" block:^(){
+                
+                [masterViewController downloadSoundboard:hero];
+                
+            }];
             [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
-            [alert addButtonWithTitle:NSLocalizedString(@"Download", nil) imageIdentifier:@"red" block:^(){}];
             
             [alert show];
             
