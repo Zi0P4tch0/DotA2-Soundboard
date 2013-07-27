@@ -15,6 +15,8 @@
 
 @synthesize masterViewController;
 
+/*
+
 void HandleExceptions(NSException *exception) {
     
     NSArray *backtrace = [exception callStackSymbols];
@@ -24,20 +26,29 @@ void HandleExceptions(NSException *exception) {
 void SignalHandler(int sig) {
     
 }
+ 
+ */
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //TestFlight exception handler
-    NSSetUncaughtExceptionHandler(&HandleExceptions);
+    /*
+     NSSetUncaughtExceptionHandler(&HandleExceptions);
     struct sigaction newSignalAction;
     memset(&newSignalAction, 0, sizeof(newSignalAction));
     newSignalAction.sa_handler = &SignalHandler;
     sigaction(SIGABRT, &newSignalAction, NULL);
     sigaction(SIGILL, &newSignalAction, NULL);
     sigaction(SIGBUS, &newSignalAction, NULL);
+    */
     
+    #ifdef USE_TESTFLIGHT
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    #pragma clang diagnostic pop
     [TestFlight takeOff:@"659ef634-3c4a-4585-946a-c08503f14f6a"];
+    #endif
     
     [iRate sharedInstance].daysUntilPrompt = 5;
     [iRate sharedInstance].usesUntilPrompt = 15;
@@ -60,7 +71,6 @@ void SignalHandler(int sig) {
     
     if ([urlString hasPrefix:@"d2sb://"])
     {
-        [TestFlight passCheckpoint:@"URL_OPEN"];
         NSLog(@"Opening URL: \"%@\".",urlString);
         
         NSArray *urlTokens = [urlString componentsSeparatedByString:@"/"];
@@ -84,6 +94,10 @@ void SignalHandler(int sig) {
             return NO;
         }
         
+        masterViewController.urlRequestParameters = [[NSMutableArray alloc] initWithCapacity:2];
+        [masterViewController.urlRequestParameters addObject:hero];
+        [masterViewController.urlRequestParameters addObject:[NSNumber numberWithUnsignedInteger:clipNumber]];
+        
         if (![masterViewController isSoundboardAvailable:hero])
         {
             NSString *msg = [NSString stringWithFormat:
@@ -97,6 +111,7 @@ void SignalHandler(int sig) {
                 
                 [masterViewController downloadSoundboard:hero];
                 
+                
             }];
             [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
             
@@ -104,10 +119,6 @@ void SignalHandler(int sig) {
             
             return NO;
         }
-        
-        masterViewController.urlRequestParameters = [[NSMutableArray alloc] initWithCapacity:2];
-        [masterViewController.urlRequestParameters addObject:hero];
-        [masterViewController.urlRequestParameters addObject:[NSNumber numberWithUnsignedInteger:clipNumber]];
         
         [masterViewController performSegueWithIdentifier:@"detail" sender:self];
         

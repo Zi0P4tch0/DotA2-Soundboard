@@ -182,6 +182,22 @@
             <point key="canvasLocation" x="466" y="-24"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="D2SBDetailViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/D2SBDetailViewController.h"/>
+        </class>
+        <class className="D2SBMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/D2SBMasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addSoundboard:"/>
+                <relationship kind="action" name="provideFeedback:"/>
+                <relationship kind="outlet" name="addSoundboardButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

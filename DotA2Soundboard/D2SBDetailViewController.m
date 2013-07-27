@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "D2SBMasterViewController.h"
 #import "MBProgressHUD.h"
 
 @implementation D2SBDetailViewController {
@@ -69,16 +70,17 @@
         [_clipsTitles addObject:[soundboard clipTitleAtIndex:i]];
     }
     
+    _lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    _lpgr.minimumPressDuration = 2;
+    [self.tableView addGestureRecognizer:_lpgr];
+    
     if (requestedClip >= 0 && requestedClip <= [_clipsTitles count]-1)
     {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:requestedClip inSection:0];
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+        [TestFlight passCheckpoint:@"CLIP_PLAYED_FROM_URL"];
     }
-    
-    _lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    _lpgr.minimumPressDuration = 2;
-    [self.tableView addGestureRecognizer:_lpgr];
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer*)recognizer{
@@ -98,13 +100,12 @@
         NSString *urlString = [NSString stringWithFormat:@"d2sb://%@/%03d",[soundboard name],indexPath.row];
         urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
         urlString = [urlString stringByReplacingOccurrencesOfString:@"\'" withString:@"%27"];
-        
-        NSLog(@"%@",urlString);
-        
+                
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.URL = [NSURL URLWithString:urlString];
         
         NSLog(@"Clip URL copied to clipboard: \"%@\".",urlString);
+        [TestFlight passCheckpoint:@"URL_SHARE"];
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;

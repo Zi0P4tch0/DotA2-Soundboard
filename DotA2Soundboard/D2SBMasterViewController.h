@@ -15,11 +15,12 @@
 
 @property (nonatomic,strong) IBOutlet UIBarButtonItem *addSoundboardButton;
 @property (nonatomic,strong) AFHTTPRequestOperation *downloadOperation;
+
 @property (nonatomic,strong) NSMutableArray *urlRequestParameters;
 
 -(void)reloadSoundboards;
 -(IBAction)addSoundboard:(id)sender;
--(void)downloadSoundboard:(NSString*)name;
+-(void)downloadSoundboard:(NSString*)heroName;
 
 -(BOOL)heroExists:(NSString*)heroName;
 -(BOOL)isSoundboardAvailable:(NSString*)heroName;

@@ -79,27 +79,27 @@ typedef enum {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL tutorialShown = [defaults boolForKey:@"tutorialShown"];
-    
-    if (!tutorialShown)
+        
+    if (tutorialShown)
     {
-        NSLog(@"Showing tutorial / Disabling addSoundboard button");
+        NSLog(@"Showing tutorial / Disabling \"addSoundboard\" button");
         
         [addSoundboardButton setEnabled:NO];
         
         MYIntroductionPanel *panelOne = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
-                                         title:@"Welcome!"
-                                         description:@"This simple tutorial will teach you how to use this amazing soundboard!"];
+                                         title:NSLocalizedString(@"Welcome!",nil)
+                                         description:NSLocalizedString(@"This simple tutorial will teach you how to use this amazing soundboard!",nil)];
     
         MYIntroductionPanel *panelTwo = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
-                                         title:@"Heroes"
-                                         description:@"There's a soundboard for each hero. As you can see, there's only one soundboard in the app right now (\"Announcer\", the default one).\n\nIn order to download an additional soundboard, you must tap the PLUS button, located in the upper right corner."];
+                                         title:NSLocalizedString(@"Heroes",nil)
+                                         description:NSLocalizedString(@"There's a soundboard for each hero. As you can see, there's only one soundboard in the app right now (\"Announcer\", the default one).\n\nIn order to download an additional soundboard, you must tap the PLUS button, located in the upper right corner.",nil)];
         
         MYIntroductionPanel *panelThree = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
-                                         title:@"That's it!"
-                                         description:@"Click on a soundboard to open it.\nA list of the available clips will be shown.\n\nSearch a clip by scrolling down the list or using the top search bar. To share a clip, just hold your finger on it for 2 seconds."];
+                                         title:NSLocalizedString(@"That's it!",nil)
+                                         description:NSLocalizedString(@"Click on a soundboard to open it.\nA list of the available clips will be shown.\n\nSearch a clip by scrolling down the list or using the top search bar.\n\nTo share a clip, just hold your finger on it for 2 seconds, and its URL will be copied into the clipboard.",nil)];
     
         MYIntroductionView *introductionView = [[MYIntroductionView alloc]
                                                 initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
@@ -155,13 +155,15 @@ typedef enum {
 
 -(void)reloadSoundboards
 {
+    NSLog(@"Reloading soundboards...");
+    
     _soundboards = [[NSMutableArray alloc] init];
     
     //Announcer soundboard check
     NSString *announcerSoundboardPath = [DOCUMENTS stringByAppendingPathComponent:@"Announcer.sb"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:announcerSoundboardPath])
     {
-        NSLog(@"Copying \"Announcer.sb\" to DOCUMENTS");
+        NSLog(@"First start. Copying \"Announcer.sb\" to DOCUMENTS.");
         NSString *announcerSoundboardBundlePath = [[NSBundle mainBundle] pathForResource:@"Announcer" ofType:@"sb"];
         [[NSFileManager defaultManager] copyItemAtPath:announcerSoundboardBundlePath toPath:announcerSoundboardPath error:NULL];
     }
@@ -191,9 +193,9 @@ typedef enum {
     [self.tableView reloadData];
 }
 
--(void)downloadSoundboard:(NSString*)name
+-(void)downloadSoundboard:(NSString*)heroName
 {
-    NSLog(@"Downloading soudboard for hero \"%@\"...",name);
+    NSLog(@"Downloading soudboard for hero \"%@\"...",heroName);
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeAnnularDeterminate;
@@ -204,7 +206,7 @@ typedef enum {
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
-        NSString *refinedValue = [name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        NSString *refinedValue = [heroName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
         NSString *downloadUrl = [NSString stringWithFormat:@"%@%@.sb",CDN_BASE_URL,refinedValue];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadUrl]];
@@ -226,6 +228,8 @@ typedef enum {
         }];
         
         __unsafe_unretained typeof(self) weakSelf = self;
+        __unsafe_unretained typeof(NSArray*) weakRequestParameters = urlRequestParameters;
+        
         [downloadOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             //SUCCESS
@@ -238,6 +242,15 @@ typedef enum {
                 [weakSelf.addSoundboardButton setEnabled:YES];
                 
             });
+            
+            [TestFlight passCheckpoint:@"DOWNLOAD_SOUNDBOARD"];
+            
+            if (weakRequestParameters)
+            {
+                [weakSelf reloadSoundboards];
+                [weakSelf performSegueWithIdentifier:@"detail" sender:weakSelf];
+                
+            }
             
         } failure:^(AFHTTPRequestOperation *op, NSError *error) {
             
@@ -275,9 +288,7 @@ typedef enum {
 
 
 -(IBAction)addSoundboard:(id)sender
-{
-    [TestFlight passCheckpoint:@"ADD_SOUNDBOARD"];
-    
+{    
     NSMutableArray *allSoundboards = [_heroes mutableCopy];
     
     NSMutableArray *installedSoundboards = [[NSMutableArray alloc] init];
@@ -324,12 +335,16 @@ typedef enum {
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //Announcer is freaking untouchable! Mama, look at him! (Axe RIP)
-    if ([[[_soundboards objectAtIndex:indexPath.row] name] isEqualToString:@"Announcer"] )
+    if (![downloadOperation isExecuting])
     {
-        return NO;
+        //Announcer is freaking untouchable! Mama, look at him! (Axe RIP)
+        if ([[[_soundboards objectAtIndex:indexPath.row] name] isEqualToString:@"Announcer"] )
+        {
+            return NO;
+        }
+        return YES;
     }
-    return YES;
+    return NO;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -337,7 +352,9 @@ typedef enum {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         NSString *targetSoundboard = [[_soundboards objectAtIndex:indexPath.row] file];
+        
         NSLog(@"User deleted \"%@\" soundboard.",targetSoundboard);
+        [TestFlight passCheckpoint:@"REMOVE_SOUNDBOARD"];
         
         [[NSFileManager defaultManager] removeItemAtPath:targetSoundboard error:NULL];
                 
@@ -398,8 +415,8 @@ typedef enum {
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"detail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         D2SBDetailViewController *destinationViewController = [segue destinationViewController];
         
         if (urlRequestParameters)

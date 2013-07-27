@@ -7,26 +7,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DotA2Soundboard/D2SBDetailViewController.m"
-         timestampString = "396122148.570007"
+         filePath = "DotA2Soundboard/D2SBMasterViewController.m"
+         timestampString = "396641880.016582"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "156"
+         endingLineNumber = "156"
+         landmarkName = "-reloadSoundboards"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "DotA2Soundboard/D2SBAppDelegate.m"
-         timestampString = "396574689.357655"
+         filePath = "DotA2Soundboard/D2SBMasterViewController.m"
+         timestampString = "396641880.016582"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "39"
-         endingLineNumber = "39"
-         landmarkName = "-application:didFinishLaunchingWithOptions:"
+         startingLineNumber = "378"
+         endingLineNumber = "378"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
