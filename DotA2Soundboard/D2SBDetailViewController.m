@@ -22,6 +22,7 @@
     UITableViewCell *_previouslySelectedCell;
     UITableView *_activeTableView;
     UILongPressGestureRecognizer *_lpgr;
+    NSUInteger _pressedClip;
     
 }
 
@@ -83,6 +84,29 @@
     }
 }
 
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    if ([buttonTitle isEqualToString:NSLocalizedString(@"Copy Link", nil)])
+    {
+        NSString *urlString = [NSString stringWithFormat:@"d2sb://%@/%03d",[soundboard name],_pressedClip];
+        urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        urlString = [urlString stringByReplacingOccurrencesOfString:@"\'" withString:@"%27"];
+        
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.URL = [NSURL URLWithString:urlString];
+        
+        NSLog(@"Clip URL copied to clipboard: \"%@\".",urlString);
+        [TestFlight passCheckpoint:@"URL_SHARE"];
+    }
+    
+    if ([buttonTitle isEqualToString:NSLocalizedString(@"Save Clip", nil)])
+    {
+        
+    }
+}
+
 -(void)handleLongPress:(UILongPressGestureRecognizer*)recognizer{
     
     if (_lpgr.state == UIGestureRecognizerStateBegan)
@@ -97,22 +121,17 @@
             indexPath = [NSIndexPath indexPathForRow: [soundboard clipIndexFromTitle:[_searchedClips objectAtIndex:indexPath.row]] inSection:0];
         }
         
-        NSString *urlString = [NSString stringWithFormat:@"d2sb://%@/%03d",[soundboard name],indexPath.row];
-        urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-        urlString = [urlString stringByReplacingOccurrencesOfString:@"\'" withString:@"%27"];
-                
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.URL = [NSURL URLWithString:urlString];
+        _pressedClip = indexPath.row;
         
-        NSLog(@"Clip URL copied to clipboard: \"%@\".",urlString);
-        [TestFlight passCheckpoint:@"URL_SHARE"];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                        initWithTitle:NSLocalizedString(@"Actions", nil)
+                                        delegate:self
+                                        cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                        destructiveButtonTitle:nil
+                                        otherButtonTitles:NSLocalizedString(@"Copy Link", nil),NSLocalizedString(@"Save Clip", nil) ,nil];
         
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.opacity = 0.5f;
-        hud.labelText = NSLocalizedString(@"Link copied to clipboard.",nil);
+        [actionSheet showInView:self.tableView];
         
-        [hud hide:YES afterDelay:2];
     }
 }
 

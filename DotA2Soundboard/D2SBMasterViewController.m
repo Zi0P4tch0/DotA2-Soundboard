@@ -17,7 +17,6 @@
 #import "MBProgressHUD.h"
 #import "Soundboard.h"
 
-#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define CDN_BASE_URL @"https://dl.dropboxusercontent.com/u/26014957/Soundboards/"
 
 typedef enum {
@@ -130,6 +129,8 @@ typedef enum {
     [addSoundboardButton setEnabled:YES];
 }
 
+#pragma mark - Soundboard related methods
+
 -(BOOL)heroExists:(NSString*)heroName
 {
     if ([heroName isEqualToString:@"Announcer"])
@@ -151,40 +152,48 @@ typedef enum {
     return NO;
 }
 
-#pragma mark - Soundboards-related methods
-
 -(void)reloadSoundboards
 {
     NSLog(@"Reloading soundboards...");
     
     _soundboards = [[NSMutableArray alloc] init];
     
+    //Folder check
+    if (![[NSFileManager defaultManager] fileExistsAtPath:SOUNDBOARDS_DIR])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:SOUNDBOARDS_DIR withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    if (![[NSFileManager defaultManager] fileExistsAtPath:RINGTONES_DIR])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:RINGTONES_DIR withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
     //Announcer soundboard check
-    NSString *announcerSoundboardPath = [DOCUMENTS stringByAppendingPathComponent:@"Announcer.sb"];
+    NSString *announcerSoundboardPath = [SOUNDBOARDS_DIR stringByAppendingPathComponent:@"Announcer.sb"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:announcerSoundboardPath])
     {
-        NSLog(@"First start. Copying \"Announcer.sb\" to DOCUMENTS.");
+        NSLog(@"First start. Copying \"Announcer.sb\" to SOUNDBOARDS_DIR.");
         NSString *announcerSoundboardBundlePath = [[NSBundle mainBundle] pathForResource:@"Announcer" ofType:@"sb"];
         [[NSFileManager defaultManager] copyItemAtPath:announcerSoundboardBundlePath toPath:announcerSoundboardPath error:NULL];
     }
     
     
-    NSArray* files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:DOCUMENTS error:NULL];
+    NSArray* files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:SOUNDBOARDS_DIR error:NULL];
         
     for(NSString* file in files)
     {
         if ([[file pathExtension] isEqualToString:@"sb"])
         {
             
-            if ([Soundboard isValidSoundboard:[DOCUMENTS stringByAppendingPathComponent:file]])
+            if ([Soundboard isValidSoundboard:[SOUNDBOARDS_DIR stringByAppendingPathComponent:file]])
             {
-                [_soundboards addObject:[[Soundboard alloc] initWithFile:[DOCUMENTS stringByAppendingPathComponent:file]]];
+                [_soundboards addObject:[[Soundboard alloc] initWithFile:[SOUNDBOARDS_DIR stringByAppendingPathComponent:file]]];
                 NSLog(@"Soundboard validated: %@",file);
             }
             else
             {
                 NSLog(@"Removing invalid soundboard: %@",file);
-                [[NSFileManager defaultManager] removeItemAtPath:[DOCUMENTS stringByAppendingPathComponent:file] error:NULL];
+                [[NSFileManager defaultManager] removeItemAtPath:[SOUNDBOARDS_DIR stringByAppendingPathComponent:file] error:NULL];
             }
             
         }
@@ -206,14 +215,14 @@ typedef enum {
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
-        NSString *refinedValue = [heroName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+        NSString *refinedValue = [[heroName stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringByReplacingOccurrencesOfString:@"\'" withString:@"%27"];
         NSString *downloadUrl = [NSString stringWithFormat:@"%@%@.sb",CDN_BASE_URL,refinedValue];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadUrl]];
         downloadOperation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
         
         
-        NSString *output = [DOCUMENTS stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sb",refinedValue]];
+        NSString *output = [SOUNDBOARDS_DIR stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sb",refinedValue]];
         
         downloadOperation.outputStream = [NSOutputStream outputStreamToFileAtPath:output append:NO];
         

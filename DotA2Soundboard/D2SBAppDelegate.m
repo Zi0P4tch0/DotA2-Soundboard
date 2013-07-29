@@ -15,33 +15,8 @@
 
 @synthesize masterViewController;
 
-/*
-
-void HandleExceptions(NSException *exception) {
-    
-    NSArray *backtrace = [exception callStackSymbols];
-    NSLog(@"Exception occurred. Backtrace:\n%@",backtrace);
-}
-
-void SignalHandler(int sig) {
-    
-}
- 
- */
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //TestFlight exception handler
-    /*
-     NSSetUncaughtExceptionHandler(&HandleExceptions);
-    struct sigaction newSignalAction;
-    memset(&newSignalAction, 0, sizeof(newSignalAction));
-    newSignalAction.sa_handler = &SignalHandler;
-    sigaction(SIGABRT, &newSignalAction, NULL);
-    sigaction(SIGILL, &newSignalAction, NULL);
-    sigaction(SIGBUS, &newSignalAction, NULL);
-    */
-    
     #ifdef USE_TESTFLIGHT
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -132,7 +107,6 @@ void SignalHandler(int sig) {
 {
     if ([[masterViewController downloadOperation] isExecuting])
     {
-        NSLog(@"Pausing download");
         [[masterViewController downloadOperation] pause];
     }
 }
@@ -152,7 +126,6 @@ void SignalHandler(int sig) {
 {
     if ([[masterViewController downloadOperation] isPaused])
     {
-        NSLog(@"Resuming download");
         [[masterViewController downloadOperation] resume];
     }
 }

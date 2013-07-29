@@ -11,6 +11,10 @@
 #import "AFNetworking.h"
 #import "MYIntroductionView.h"
 
+#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+#define SOUNDBOARDS_DIR [DOCUMENTS stringByAppendingPathComponent:@"Soundboards"]
+#define RINGTONES_DIR DOCUMENTS
+
 @interface D2SBMasterViewController : UITableViewController <NSXMLParserDelegate,MYIntroductionDelegate>
 
 @property (nonatomic,strong) IBOutlet UIBarButtonItem *addSoundboardButton;
