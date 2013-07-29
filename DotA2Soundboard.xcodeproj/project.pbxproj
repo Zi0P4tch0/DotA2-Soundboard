@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9528438817A445AC00BA5A35 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9528438A17A445AC00BA5A35 /* Localizable.strings */; };
 		9533E494179BDF250042473A /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9533E491179BDF250042473A /* iRate.bundle */; };
 		9533E495179BDF250042473A /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9533E493179BDF250042473A /* iRate.m */; };
 		9533E499179BE0000042473A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9533E498179BE0000042473A /* StoreKit.framework */; };
@@ -113,8 +112,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9528438917A445AC00BA5A35 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		9528438B17A445CA00BA5A35 /* it */ = {isa = PBXFileReference; lastKnownFileType = file; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9533E491179BDF250042473A /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = iRate.bundle; path = ../Submodules/iRate/iRate/iRate.bundle; sourceTree = "<group>"; };
 		9533E492179BDF250042473A /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iRate.h; path = Submodules/iRate/iRate/iRate.h; sourceTree = "<group>"; };
 		9533E493179BDF250042473A /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iRate.m; path = Submodules/iRate/iRate/iRate.m; sourceTree = "<group>"; };
@@ -149,7 +146,7 @@
 		955DE6EC17A4197100147EFD /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		955DE6ED17A4197100147EFD /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		955DE6EE17A4197100147EFD /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
-		955DE6EF17A4197100147EFD /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
+		955DE6EF17A4197100147EFD /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = text; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		9563EE161799BCCD0003742A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		9563EE181799BCEE0003742A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9563EE1A1799BD830003742A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -300,7 +297,6 @@
 		95383BCD17984F2700745084 /* DotA2Soundboard */ = {
 			isa = PBXGroup;
 			children = (
-				9528438A17A445AC00BA5A35 /* Localizable.strings */,
 				95383BDF17984F2700745084 /* Storyboard.storyboard */,
 				95A7A765179A15AD005C0035 /* Graphics */,
 				95383BF917984F5F00745084 /* Soundboards */,
@@ -576,7 +572,6 @@
 				955DE6F517A4197100147EFD /* Icon-Small@2x.png in Resources */,
 				955DE6F617A4197100147EFD /* iTunesArtwork in Resources */,
 				955DE6F717A4197100147EFD /* iTunesArtwork@2x in Resources */,
-				9528438817A445AC00BA5A35 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,15 +624,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9528438A17A445AC00BA5A35 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9528438917A445AC00BA5A35 /* en */,
-				9528438B17A445CA00BA5A35 /* it */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		95383BD017984F2700745084 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

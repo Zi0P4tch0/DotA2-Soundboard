@@ -406,6 +406,12 @@ typedef enum {
     }
     
     [heroImageView setImage:[UIImage imageWithContentsOfFile:iconFile]];
+    
+    [cell.layer setCornerRadius:15.0f];
+    [cell.layer setBorderWidth:1.0f];
+    [cell.layer setBorderColor:[UIColor grayColor].CGColor];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
     return cell;
 }
