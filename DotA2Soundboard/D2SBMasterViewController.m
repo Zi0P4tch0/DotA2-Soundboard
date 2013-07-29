@@ -79,7 +79,7 @@ typedef enum {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL tutorialShown = [defaults boolForKey:@"tutorialShown"];
         
-    if (tutorialShown)
+    if (!tutorialShown)
     {
         NSLog(@"Showing tutorial / Disabling \"addSoundboard\" button");
         

@@ -17,5 +17,6 @@
 @property (strong,nonatomic) Soundboard* soundboard;
 @property (assign,nonatomic) int requestedClip;
 @property (strong,nonatomic) AVAudioPlayer* player;
+@property (strong,nonatomic) UIDocumentInteractionController *dic;
 
 @end
