@@ -103,7 +103,14 @@
     
     if ([buttonTitle isEqualToString:NSLocalizedString(@"Save Clip", nil)])
     {
+        NSData *clipData = [soundboard clipDataFromClipAtIndex:_pressedClip];
+        NSString *output = [RINGTONES_DIR stringByAppendingPathComponent:[NSString stringWithFormat:@"%@ - \"%@\".mp3",[soundboard name],[soundboard clipTitleAtIndex:_pressedClip]]];
         
+        [clipData writeToFile:output atomically:YES];
+        
+        NSLog(@"Clip saved to RINGTONES_DIR: \"%@\".",output);
+        [TestFlight passCheckpoint:@"SAVE_CLIP"];
+
     }
 }
 
