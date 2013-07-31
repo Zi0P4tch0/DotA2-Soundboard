@@ -163,8 +163,15 @@
                             <outlet property="delegate" destination="f6A-EF-P9g" id="aRv-Bk-xqr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="51b-P0-sn6"/>
+                    <navigationItem key="navigationItem" id="51b-P0-sn6">
+                        <barButtonItem key="rightBarButtonItem" id="sq1-kq-jTr">
+                            <connections>
+                                <action selector="onSearchButtonClick:" destination="f6A-EF-P9g" id="ZBU-QE-tf4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="searchButton" destination="sq1-kq-jTr" id="CYl-H9-XaA"/>
                         <outlet property="searchDisplayController" destination="8Pv-sk-i1N" id="qEj-fl-Kby"/>
                     </connections>
                 </tableViewController>
@@ -185,12 +192,15 @@
     <classes>
         <class className="D2SBDetailViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/D2SBDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onSearchButtonClick:"/>
+                <relationship kind="outlet" name="searchButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="D2SBMasterViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/D2SBMasterViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addSoundboard:"/>
-                <relationship kind="action" name="provideFeedback:"/>
                 <relationship kind="outlet" name="addSoundboardButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>

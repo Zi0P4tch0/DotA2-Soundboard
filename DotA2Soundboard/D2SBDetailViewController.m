@@ -31,6 +31,7 @@
 @synthesize player;
 @synthesize requestedClip;
 @synthesize dic;
+@synthesize searchButton;
 
 #pragma mark - View methods
 
@@ -77,6 +78,9 @@
     _lpgr.minimumPressDuration = 2;
     [self.tableView addGestureRecognizer:_lpgr];
     
+    //Search button
+    searchButton.image = [UIImage imageNamed:@"magnify.png"];
+    
     //Search bar hideout
     CGRect searchBarFrame = self.searchDisplayController.searchBar.frame;
     CGFloat searchBarHeight = searchBarFrame.size.height;
@@ -91,6 +95,11 @@
         [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
         [TestFlight passCheckpoint:@"CLIP_PLAYED_FROM_URL"];
     }
+}
+
+-(IBAction)onSearchButtonClick:(id)sender
+{
+    [self.tableView scrollRectToVisible:self.searchDisplayController.searchBar.frame animated:YES];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -118,7 +127,7 @@
         [clipData writeToFile:output atomically:YES];
         
         NSLog(@"Clip saved to RINGTONES_DIR: \"%@\".",output);
-        [TestFlight passCheckpoint:@"SAVE_CLIP"];
+        [TestFlight passCheckpoint:@"CLIP_SAVE"];
 
     }
     
@@ -131,6 +140,7 @@
         if ([[UIApplication sharedApplication] canOpenURL: whatsappURL])
         {
             [[UIApplication sharedApplication] openURL: whatsappURL];
+            [TestFlight passCheckpoint:@"URL_SHARE_WHATSAPP"];
         }
         else
         {
@@ -163,6 +173,10 @@
             [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
             
             [alert show];
+        }
+        else
+        {
+            [TestFlight passCheckpoint:@"CLIP_SHARE_WHATSAPP"];
         }
     }
 }
@@ -371,6 +385,8 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.rowHeight = 80;
     tableView.bounces = NO;
+    
+    [TestFlight passCheckpoint:@"CLIP_SEARCH"];
         
 }
 

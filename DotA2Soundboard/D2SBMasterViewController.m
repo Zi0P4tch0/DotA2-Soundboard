@@ -77,7 +77,7 @@ typedef enum {
     [self reloadSoundboards];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL tutorialShown = [defaults boolForKey:@"tutorialShown"];
+    BOOL tutorialShown = NO; //[defaults boolForKey:@"tutorialShown"];
         
     if (!tutorialShown)
     {
@@ -98,7 +98,7 @@ typedef enum {
         MYIntroductionPanel *panelThree = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
                                          title:NSLocalizedString(@"That's it!",nil)
-                                         description:NSLocalizedString(@"Click on a soundboard to open it.\nA list of the available clips will be shown.\n\nSearch a clip by scrolling down the list or using the top search bar.\n\nTo share a clip, just hold your finger on it for 2 seconds, and its URL will be copied into the clipboard.",nil)];
+                                         description:NSLocalizedString(@"Click on a soundboard to open it.\nA list of the available clips will apper.\n\nSearch a clip by scrolling down the list or using the top search bar.\n\nTo view clip sharing options, just hold your finger on a clip for 2 seconds.",nil)];
     
         MYIntroductionView *introductionView = [[MYIntroductionView alloc]
                                                 initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)

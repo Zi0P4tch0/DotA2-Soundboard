@@ -16,3 +16,6 @@
 [submodule "Submodules/iPhone-IntroductionTutorial"]
 	path = Submodules/iPhone-IntroductionTutorial
 	url = https://github.com/staxmanade/iPhone-IntroductionTutorial.git
+[submodule "Submodules/AFAmazonS3Client"]
+	path = Submodules/AFAmazonS3Client
+	url = https://github.com/AFNetworking/AFAmazonS3Client.git

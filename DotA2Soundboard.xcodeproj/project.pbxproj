@@ -25,6 +25,8 @@
 		95383BF817984F5000745084 /* libSoundboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383BF317984F3D00745084 /* libSoundboard.a */; };
 		95383C031798584E00745084 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383C021798584E00745084 /* AVFoundation.framework */; };
 		953CCA411799EF750001DB16 /* background-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 953CCA401799EF750001DB16 /* background-568h@2x.png */; };
+		953E6A5D17A7D192000EC8AB /* magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 953E6A5B17A7D192000EC8AB /* magnify.png */; };
+		953E6A5E17A7D192000EC8AB /* magnify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 953E6A5C17A7D192000EC8AB /* magnify@2x.png */; };
 		954CCE8A179B03910044477C /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D8321E179B01DD0062A6DF /* libMBProgressHUD.a */; };
 		955DE6E517A4195D00147EFD /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 955DE6E417A4195D00147EFD /* Icon@2x.png */; };
 		955DE6E717A4196100147EFD /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 955DE6E617A4196100147EFD /* Icon.png */; };
@@ -137,6 +139,8 @@
 		95383BED17984F3D00745084 /* Soundboard.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Soundboard.xcodeproj; path = ../Soundboard/Soundboard.xcodeproj; sourceTree = "<group>"; };
 		95383C021798584E00745084 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		953CCA401799EF750001DB16 /* background-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-568h@2x.png"; path = "DotA2Soundboard/background-568h@2x.png"; sourceTree = "<group>"; };
+		953E6A5B17A7D192000EC8AB /* magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = magnify.png; path = DotA2Soundboard/magnify.png; sourceTree = "<group>"; };
+		953E6A5C17A7D192000EC8AB /* magnify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "magnify@2x.png"; path = "DotA2Soundboard/magnify@2x.png"; sourceTree = "<group>"; };
 		955DE6E417A4195D00147EFD /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		955DE6E617A4196100147EFD /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		955DE6E817A4197100147EFD /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -385,6 +389,8 @@
 		95A7A765179A15AD005C0035 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				953E6A5B17A7D192000EC8AB /* magnify.png */,
+				953E6A5C17A7D192000EC8AB /* magnify@2x.png */,
 				955DE6E617A4196100147EFD /* Icon.png */,
 				955DE6E417A4195D00147EFD /* Icon@2x.png */,
 				955DE6E817A4197100147EFD /* Icon-72.png */,
@@ -572,6 +578,8 @@
 				955DE6F517A4197100147EFD /* Icon-Small@2x.png in Resources */,
 				955DE6F617A4197100147EFD /* iTunesArtwork in Resources */,
 				955DE6F717A4197100147EFD /* iTunesArtwork@2x in Resources */,
+				953E6A5D17A7D192000EC8AB /* magnify.png in Resources */,
+				953E6A5E17A7D192000EC8AB /* magnify@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

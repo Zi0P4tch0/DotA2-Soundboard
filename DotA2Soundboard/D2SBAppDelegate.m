@@ -29,12 +29,22 @@
     [iRate sharedInstance].usesUntilPrompt = 15;
     
     //Delete temporary files
+    NSError *error = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *tmpFiles = [fileManager contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
+    NSArray *tmpFiles = [fileManager contentsOfDirectoryAtPath:NSTemporaryDirectory() error:&error];
+    if (error)
+    {
+        NSLog(@"Error while obtaining NSTemporaryDirectory contents: \"%@\".",[error localizedDescription]);
+    }
     for (NSString *file in tmpFiles)
     {
+        error = nil;
         NSLog(@"Deleting temporary file: \"%@\"...",file);
-        [fileManager removeItemAtPath:file error:NULL];
+        [fileManager removeItemAtPath:file error:&error];
+        if (error)
+        {
+            NSLog(@"Error while removing temporary file: \"%@\".",[error localizedDescription]);
+        }
     }
         
     return YES;
