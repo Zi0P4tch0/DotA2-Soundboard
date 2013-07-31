@@ -8,17 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AFNetworking.h"
+#import "AFAmazonS3Client.h"
 #import "MYIntroductionView.h"
 
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define SOUNDBOARDS_DIR [DOCUMENTS stringByAppendingPathComponent:@"Soundboards"]
 #define RINGTONES_DIR DOCUMENTS
 
+#define HEROES_NO 102
+
 @interface D2SBMasterViewController : UITableViewController <NSXMLParserDelegate,MYIntroductionDelegate>
 
 @property (nonatomic,strong) IBOutlet UIBarButtonItem *addSoundboardButton;
-@property (nonatomic,strong) AFHTTPRequestOperation *downloadOperation;
+@property (nonatomic,strong) AFAmazonS3Client *downloadOperation;
+@property (nonatomic,assign) BOOL isDownloading;
 
 @property (nonatomic,strong) NSMutableArray *urlRequestParameters;
 

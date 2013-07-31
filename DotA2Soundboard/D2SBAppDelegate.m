@@ -115,10 +115,12 @@
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    /*
     if ([[masterViewController downloadOperation] isExecuting])
     {
         [[masterViewController downloadOperation] pause];
     }
+     */
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -134,10 +136,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    /*
     if ([[masterViewController downloadOperation] isPaused])
     {
         [[masterViewController downloadOperation] resume];
     }
+     */
 }
 
 @end

@@ -44,7 +44,7 @@
 {
     [super viewDidLoad];
     
-    if ([[UIScreen mainScreen] bounds].size.height == 568.0f)
+    if (IS_IPHONE5)
     {
         //iPhone5
         NSString *image = [[NSBundle mainBundle] pathForResource:@"background-568h@2x" ofType:@"png"];
@@ -64,7 +64,7 @@
     
     self.navigationItem.title = [soundboard name];
     
-    _clipsTitles = [[NSMutableArray alloc] init];
+    _clipsTitles = [[NSMutableArray alloc] initWithCapacity:[soundboard numberOfClips]];
     _searchedClips = [[NSMutableArray alloc] init];
     
     int clipsno = [soundboard numberOfClips];
@@ -75,7 +75,7 @@
     }
     
     _lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    _lpgr.minimumPressDuration = 2;
+    _lpgr.minimumPressDuration = 1.5;
     [self.tableView addGestureRecognizer:_lpgr];
     
     //Search button
@@ -115,6 +115,14 @@
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.URL = [NSURL URLWithString:urlString];
         
+        BlockAlertView *alert = [[BlockAlertView alloc]
+                                 initWithTitle:NSLocalizedString(@"Success!",nil)
+                                 message:NSLocalizedString(@"Link has been copied to clipboard!",nil)];
+        
+        [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+        
+        [alert show];
+        
         NSLog(@"Clip URL copied to clipboard: \"%@\".",urlString);
         [TestFlight passCheckpoint:@"URL_SHARE"];
     }
@@ -125,6 +133,14 @@
         NSString *output = [RINGTONES_DIR stringByAppendingPathComponent:[NSString stringWithFormat:@"%@ - \"%@\".mp3",[soundboard name],[soundboard clipTitleAtIndex:_pressedClipIndex]]];
         
         [clipData writeToFile:output atomically:YES];
+        
+        BlockAlertView *alert = [[BlockAlertView alloc]
+                                 initWithTitle:NSLocalizedString(@"Success!",nil)
+                                 message:NSLocalizedString(@"Clip has been saved to D2SB Documents!\nConnect your device to iTunes to retrieve the saved content.",nil)];
+        
+        [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+        
+        [alert show];
         
         NSLog(@"Clip saved to RINGTONES_DIR: \"%@\".",output);
         [TestFlight passCheckpoint:@"CLIP_SAVE"];
@@ -213,6 +229,8 @@
                                             NSLocalizedString(@"Save Clip", nil),
                                             NSLocalizedString(@"Share Link (WhatsApp)",nil),
                                             NSLocalizedString(@"Share Clip (WhatsApp)",nil),nil];
+        
+        actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
         
         [actionSheet showInView:self.tableView];
         
@@ -315,11 +333,6 @@
 {
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    }
         
     //Clip title
     UILabel *clipTitleLabel = (UILabel*)[cell viewWithTag:101];
@@ -370,7 +383,7 @@
 -(void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
 {
     
-    if ([[UIScreen mainScreen] bounds].size.height == 568.0f)
+    if (IS_IPHONE5)
     {
         //iPhone5
         NSString *image = [[NSBundle mainBundle] pathForResource:@"background-568h@2x" ofType:@"png"];

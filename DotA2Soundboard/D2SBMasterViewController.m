@@ -17,7 +17,7 @@
 #import "MBProgressHUD.h"
 #import "Soundboard.h"
 
-#define CDN_BASE_URL @"https://dl.dropboxusercontent.com/u/26014957/Soundboards/"
+#define S3_BASE_URL @"https://s3-eu-west-1.amazonaws.com/d2sb/"
 
 typedef enum {
     
@@ -39,6 +39,7 @@ typedef enum {
 @synthesize addSoundboardButton;
 @synthesize downloadOperation;
 @synthesize urlRequestParameters;
+@synthesize isDownloading;
 
 #pragma mark - View methods
 
@@ -50,12 +51,12 @@ typedef enum {
     
     appDelegate.masterViewController = (D2SBMasterViewController*)self;
     
-    _heroes = [[NSMutableArray alloc] init];
+    _heroes = [[NSMutableArray alloc] initWithCapacity:HEROES_NO];
     _soundboards = [[NSMutableArray alloc] init];
     urlRequestParameters = nil;
     
         
-    if ([[UIScreen mainScreen] bounds].size.height == 568.0f)
+    if (IS_IPHONE5)
     {
         //iPhone5
         NSString *image = [[NSBundle mainBundle] pathForResource:@"background-568h@2x" ofType:@"png"];
@@ -216,80 +217,88 @@ typedef enum {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
         NSString *refinedValue = [[heroName stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringByReplacingOccurrencesOfString:@"\'" withString:@"%27"];
-        NSString *downloadUrl = [NSString stringWithFormat:@"%@%@.sb",CDN_BASE_URL,refinedValue];
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadUrl]];
-        downloadOperation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
-        
+        downloadOperation = [[AFAmazonS3Client alloc]
+                             initWithAccessKeyID:@"AKIAI5PZZ6LV4RHLWWWQ"
+                             secret:@"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"];
+        downloadOperation.bucket = @"d2sb";
         
         NSString *output = [SOUNDBOARDS_DIR stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sb",refinedValue]];
         
-        downloadOperation.outputStream = [NSOutputStream outputStreamToFileAtPath:output append:NO];
-        
-        [downloadOperation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long expectedSize) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [hud setProgress:(float)totalBytesRead/(float)expectedSize];
-                
-            });
-            
-        }];
-        
         __unsafe_unretained typeof(self) weakSelf = self;
         __unsafe_unretained typeof(NSArray*) weakRequestParameters = urlRequestParameters;
+
+        NSLog(@"Amazon S3 object path: \"%@\".",[NSString stringWithFormat:@"%@%@.sb",S3_BASE_URL,refinedValue]);
         
-        [downloadOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-            //SUCCESS
-            dispatch_async(dispatch_get_main_queue(), ^{
+        [downloadOperation getObjectWithPath:[NSString stringWithFormat:@"/%@.sb",refinedValue]
+                                outputStream:[NSOutputStream outputStreamToFileAtPath:output append:NO]
+                                progress:^(NSUInteger bytesRead , long long totalBytesRead, long long expectedSize)
+                                {
+                                    if (!isDownloading)
+                                    {
+                                        isDownloading = YES;
+                                    }
+                                    
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        
+                                        [hud setProgress:(float)totalBytesRead/(float)expectedSize];
+                                        
+                                    });
+                                }
+                                success:^(id responseObject)
+                                {
+                                    isDownloading = NO;
+                                    
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        
+                                        NSLog(@"Soundboard \"%@\" successfully downloaded!",[NSString stringWithFormat:@"%@.sb",refinedValue]);
+                                        
+                                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                        [weakSelf reloadSoundboards];
+                                        [weakSelf.addSoundboardButton setEnabled:YES];
+                                        
+                                    });
+                                    
+                                    [TestFlight passCheckpoint:@"DOWNLOAD_SOUNDBOARD"];
+                                    
+                                    if (weakRequestParameters)
+                                    {
+                                        [weakSelf reloadSoundboards];
+                                        [weakSelf performSegueWithIdentifier:@"detail" sender:weakSelf];
+                                        
+                                    }
+                                }
+                                failure:^(NSError *error)
+                                {
+                                    isDownloading = NO;
+                                    
+                                    if ([[NSFileManager defaultManager] fileExistsAtPath:output])
+                                    {
+                                        [[NSFileManager defaultManager] removeItemAtPath:output error:NULL];
+                                    }
+                                    
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        
+                                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                        [weakSelf.addSoundboardButton setEnabled:YES];
+                                        
+                                    });
+                                    
+                                    NSLog(@"Error while downloading soundboard \"%@\": \"%@\"!",[NSString stringWithFormat:@"%@.sb",refinedValue],[error localizedDescription]);
+                                    
+                                    BlockAlertView *alert = [[BlockAlertView alloc]
+                                                             initWithTitle:NSLocalizedString(@"Download Error!",nil)
+                                                             message:[error localizedDescription]];
+                                    
+                                    [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+                                    
+                                    [alert show];
+                                
+                                }
+         ];
                 
-                NSLog(@"Soundboard \"%@\" successfully downloaded!",[NSString stringWithFormat:@"%@.sb",refinedValue]);
-                
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                [weakSelf reloadSoundboards];
-                [weakSelf.addSoundboardButton setEnabled:YES];
-                
-            });
-            
-            [TestFlight passCheckpoint:@"DOWNLOAD_SOUNDBOARD"];
-            
-            if (weakRequestParameters)
-            {
-                [weakSelf reloadSoundboards];
-                [weakSelf performSegueWithIdentifier:@"detail" sender:weakSelf];
-                
-            }
-            
-        } failure:^(AFHTTPRequestOperation *op, NSError *error) {
-            
-            
-            //FAILURE
-            if ([[NSFileManager defaultManager] fileExistsAtPath:output])
-            {
-                [[NSFileManager defaultManager] removeItemAtPath:output error:NULL];
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                [weakSelf.addSoundboardButton setEnabled:YES];
-                
-            });
-            
-            NSLog(@"Error while downloading soundboard \"%@\": \"%@\"!",[NSString stringWithFormat:@"%@.sb",refinedValue],[error localizedDescription]);
-            
-            BlockAlertView *alert = [[BlockAlertView alloc]
-                                     initWithTitle:NSLocalizedString(@"Download Error!",nil)
-                                     message:[error localizedDescription]];
-            
-            [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
-            
-            [alert show];
-            
-        }];
-        [downloadOperation start];
-    });
+    
+    }); //Dispatch-async end
     
     
 }
@@ -344,7 +353,7 @@ typedef enum {
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![downloadOperation isExecuting])
+    if (!isDownloading)
     {
         //Announcer is freaking untouchable! Mama, look at him! (Axe RIP)
         if ([[[_soundboards objectAtIndex:indexPath.row] name] isEqualToString:@"Announcer"] )
@@ -388,11 +397,6 @@ typedef enum {
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    }
-
     Soundboard *soundboard = _soundboards[indexPath.row];
     
     //Hero Label
@@ -411,7 +415,7 @@ typedef enum {
     if (![[NSFileManager defaultManager] fileExistsAtPath:iconFile])
     {
         NSData *iconData = [soundboard iconData];
-        [iconData writeToFile:iconFile atomically:NO];
+        [iconData writeToFile:iconFile atomically:YES];
     }
     
     [heroImageView setImage:[UIImage imageWithContentsOfFile:iconFile]];
