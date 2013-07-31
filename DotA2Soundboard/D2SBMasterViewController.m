@@ -78,7 +78,7 @@ typedef enum {
     [self reloadSoundboards];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL tutorialShown = NO; //[defaults boolForKey:@"tutorialShown"];
+    BOOL tutorialShown = [defaults boolForKey:@"tutorialShown"];
         
     if (!tutorialShown)
     {
@@ -94,12 +94,12 @@ typedef enum {
         MYIntroductionPanel *panelTwo = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
                                          title:NSLocalizedString(@"Heroes",nil)
-                                         description:NSLocalizedString(@"There's a soundboard for each hero. As you can see, there's only one soundboard in the app right now (\"Announcer\", the default one).\n\nIn order to download an additional soundboard, you must tap the PLUS button, located in the upper right corner.",nil)];
+                                         description:NSLocalizedString(@"There's a soundboard for each hero. As you will see, there's only one soundboard in the app right now (\"Announcer\", the default one).\n\nIn order to download an additional soundboard, you must tap the PLUS button, located in the upper right corner.",nil)];
         
         MYIntroductionPanel *panelThree = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
                                          title:NSLocalizedString(@"That's it!",nil)
-                                         description:NSLocalizedString(@"Click on a soundboard to open it.\nA list of the available clips will apper.\n\nSearch a clip by scrolling down the list or using the top search bar.\n\nTo view clip sharing options, just hold your finger on a clip for 2 seconds.",nil)];
+                                         description:NSLocalizedString(@"Click on a soundboard to open it.\nA list of the available clips will appear.\n\nSearch a clip by scrolling down the list or using the top search bar.\n\nTo play a clip, just click on it!\n\nTo view clip sharing options, just hold your finger on a clip for 1-2 seconds.",nil)];
     
         MYIntroductionView *introductionView = [[MYIntroductionView alloc]
                                                 initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
@@ -259,7 +259,9 @@ typedef enum {
                                         
                                     });
                                     
+                                        #ifdef USE_TESTFLIGHT
                                     [TestFlight passCheckpoint:@"DOWNLOAD_SOUNDBOARD"];
+                                        #endif
                                     
                                     if (weakRequestParameters)
                                     {
@@ -372,7 +374,9 @@ typedef enum {
         NSString *targetSoundboard = [[_soundboards objectAtIndex:indexPath.row] file];
         
         NSLog(@"User deleted \"%@\" soundboard.",targetSoundboard);
+         #ifdef USE_TESTFLIGHT
         [TestFlight passCheckpoint:@"REMOVE_SOUNDBOARD"];
+         #endif
         
         [[NSFileManager defaultManager] removeItemAtPath:targetSoundboard error:NULL];
                 

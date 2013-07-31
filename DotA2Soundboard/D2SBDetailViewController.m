@@ -124,7 +124,10 @@
         [alert show];
         
         NSLog(@"Clip URL copied to clipboard: \"%@\".",urlString);
+        
+         #ifdef USE_TESTFLIGHT
         [TestFlight passCheckpoint:@"URL_SHARE"];
+         #endif
     }
     
     if ([buttonTitle isEqualToString:NSLocalizedString(@"Save Clip", nil)])
@@ -136,14 +139,17 @@
         
         BlockAlertView *alert = [[BlockAlertView alloc]
                                  initWithTitle:NSLocalizedString(@"Success!",nil)
-                                 message:NSLocalizedString(@"Clip has been saved to D2SB Documents!\nConnect your device to iTunes to retrieve the saved content.",nil)];
+                                 message:NSLocalizedString(@"Clip has been saved to D2SB Documents!\n\nConnect your device to iTunes and go to the App section to retrieve the saved content.",nil)];
         
         [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
         
         [alert show];
         
         NSLog(@"Clip saved to RINGTONES_DIR: \"%@\".",output);
+        
+         #ifdef USE_TESTFLIGHT
         [TestFlight passCheckpoint:@"CLIP_SAVE"];
+         #endif
 
     }
     
@@ -156,7 +162,10 @@
         if ([[UIApplication sharedApplication] canOpenURL: whatsappURL])
         {
             [[UIApplication sharedApplication] openURL: whatsappURL];
+            
+             #ifdef USE_TESTFLIGHT
             [TestFlight passCheckpoint:@"URL_SHARE_WHATSAPP"];
+             #endif
         }
         else
         {
@@ -192,7 +201,9 @@
         }
         else
         {
+             #ifdef USE_TESTFLIGHT
             [TestFlight passCheckpoint:@"CLIP_SHARE_WHATSAPP"];
+             #endif
         }
     }
 }
@@ -399,8 +410,10 @@
     tableView.rowHeight = 80;
     tableView.bounces = NO;
     
+     #ifdef USE_TESTFLIGHT
     [TestFlight passCheckpoint:@"CLIP_SEARCH"];
-        
+     #endif
+    
 }
 
 
