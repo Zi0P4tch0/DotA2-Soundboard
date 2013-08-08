@@ -9,7 +9,6 @@
 #import "D2SBAppDelegate.h"
 
 #import "BlockAlertView.h"
-#import "iRate.h"
 
 @implementation D2SBAppDelegate
 
@@ -24,9 +23,6 @@
     #pragma clang diagnostic pop
     [TestFlight takeOff:@"659ef634-3c4a-4585-946a-c08503f14f6a"];
     #endif
-    
-    [iRate sharedInstance].daysUntilPrompt = 5;
-    [iRate sharedInstance].usesUntilPrompt = 15;
     
     //Delete temporary files
     NSError *error = nil;

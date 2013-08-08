@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9533E494179BDF250042473A /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9533E491179BDF250042473A /* iRate.bundle */; };
-		9533E495179BDF250042473A /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9533E493179BDF250042473A /* iRate.m */; };
 		9533E499179BE0000042473A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9533E498179BE0000042473A /* StoreKit.framework */; };
 		95383BC817984F2700745084 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383BC717984F2700745084 /* UIKit.framework */; };
 		95383BCA17984F2700745084 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383BC917984F2700745084 /* Foundation.framework */; };
@@ -22,7 +21,6 @@
 		95383BE117984F2700745084 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95383BDF17984F2700745084 /* Storyboard.storyboard */; };
 		95383BE417984F2700745084 /* D2SBMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95383BE317984F2700745084 /* D2SBMasterViewController.m */; };
 		95383BE717984F2700745084 /* D2SBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95383BE617984F2700745084 /* D2SBDetailViewController.m */; };
-		95383BF817984F5000745084 /* libSoundboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383BF317984F3D00745084 /* libSoundboard.a */; };
 		95383C031798584E00745084 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383C021798584E00745084 /* AVFoundation.framework */; };
 		953CCA411799EF750001DB16 /* background-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 953CCA401799EF750001DB16 /* background-568h@2x.png */; };
 		953E6A5D17A7D192000EC8AB /* magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 953E6A5B17A7D192000EC8AB /* magnify.png */; };
@@ -50,6 +48,7 @@
 		95A7A760179A1267005C0035 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A7A75E179A1267005C0035 /* background.png */; };
 		95A7A761179A1267005C0035 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A7A75F179A1267005C0035 /* background@2x.png */; };
 		95A7A767179A1860005C0035 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A7A766179A1860005C0035 /* QuartzCore.framework */; };
+		95CD93B817B3DE6500EBF727 /* libSoundboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95CD93B517B3DE3B00EBF727 /* libSoundboard.a */; };
 		95D22582179C7E3F00639253 /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D22579179C7E3F00639253 /* BlockActionSheet.m */; };
 		95D22583179C7E3F00639253 /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D2257B179C7E3F00639253 /* BlockAlertView.m */; };
 		95D22584179C7E3F00639253 /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D2257D179C7E3F00639253 /* BlockBackground.m */; };
@@ -84,16 +83,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		95383BF217984F3D00745084 /* PBXContainerItemProxy */ = {
+		95CD93B417B3DE3B00EBF727 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95383BED17984F3D00745084 /* Soundboard.xcodeproj */;
+			containerPortal = 95CD93AF17B3DE3B00EBF727 /* Soundboard.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 95383B8717984E9400745084;
 			remoteInfo = Soundboard;
 		};
-		95383BF617984F4A00745084 /* PBXContainerItemProxy */ = {
+		95CD93B617B3DE6100EBF727 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95383BED17984F3D00745084 /* Soundboard.xcodeproj */;
+			containerPortal = 95CD93AF17B3DE3B00EBF727 /* Soundboard.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 95383B8617984E9400745084;
 			remoteInfo = Soundboard;
@@ -116,8 +115,6 @@
 
 /* Begin PBXFileReference section */
 		9533E491179BDF250042473A /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = iRate.bundle; path = ../Submodules/iRate/iRate/iRate.bundle; sourceTree = "<group>"; };
-		9533E492179BDF250042473A /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iRate.h; path = Submodules/iRate/iRate/iRate.h; sourceTree = "<group>"; };
-		9533E493179BDF250042473A /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iRate.m; path = Submodules/iRate/iRate/iRate.m; sourceTree = "<group>"; };
 		9533E498179BE0000042473A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		95383BC417984F2700745084 /* DotA2Soundboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotA2Soundboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95383BC717984F2700745084 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -137,7 +134,6 @@
 		95383BE317984F2700745084 /* D2SBMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = D2SBMasterViewController.m; sourceTree = "<group>"; };
 		95383BE517984F2700745084 /* D2SBDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = D2SBDetailViewController.h; sourceTree = "<group>"; };
 		95383BE617984F2700745084 /* D2SBDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = D2SBDetailViewController.m; sourceTree = "<group>"; };
-		95383BED17984F3D00745084 /* Soundboard.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Soundboard.xcodeproj; path = ../Soundboard/Soundboard.xcodeproj; sourceTree = "<group>"; };
 		95383C021798584E00745084 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		953CCA401799EF750001DB16 /* background-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-568h@2x.png"; path = "DotA2Soundboard/background-568h@2x.png"; sourceTree = "<group>"; };
 		953E6A5B17A7D192000EC8AB /* magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = magnify.png; path = DotA2Soundboard/magnify.png; sourceTree = "<group>"; };
@@ -166,6 +162,7 @@
 		95A7A75E179A1267005C0035 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = DotA2Soundboard/background.png; sourceTree = "<group>"; };
 		95A7A75F179A1267005C0035 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background@2x.png"; path = "DotA2Soundboard/background@2x.png"; sourceTree = "<group>"; };
 		95A7A766179A1860005C0035 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		95CD93AF17B3DE3B00EBF727 /* Soundboard.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Soundboard.xcodeproj; path = Submodules/Soundboard/Soundboard.xcodeproj; sourceTree = "<group>"; };
 		95D22576179C7E3600639253 /* BlockUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlockUI.h; path = "Submodules/BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ProjectSpecific/BlockUI.h"; sourceTree = SOURCE_ROOT; };
 		95D22578179C7E3F00639253 /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlockActionSheet.h; path = "Submodules/BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockActionSheet.h"; sourceTree = SOURCE_ROOT; };
 		95D22579179C7E3F00639253 /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlockActionSheet.m; path = "Submodules/BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockActionSheet.m"; sourceTree = SOURCE_ROOT; };
@@ -223,6 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95CD93B817B3DE6500EBF727 /* libSoundboard.a in Frameworks */,
 				956B21F717A3117F00EF6130 /* libz.dylib in Frameworks */,
 				9533E499179BE0000042473A /* StoreKit.framework in Frameworks */,
 				954CCE8A179B03910044477C /* libMBProgressHUD.a in Frameworks */,
@@ -232,7 +230,6 @@
 				9563EE191799BCEE0003742A /* SystemConfiguration.framework in Frameworks */,
 				9563EE171799BCCD0003742A /* MobileCoreServices.framework in Frameworks */,
 				95383C031798584E00745084 /* AVFoundation.framework in Frameworks */,
-				95383BF817984F5000745084 /* libSoundboard.a in Frameworks */,
 				95383BC817984F2700745084 /* UIKit.framework in Frameworks */,
 				95383BCA17984F2700745084 /* Foundation.framework in Frameworks */,
 				95383BCC17984F2700745084 /* CoreGraphics.framework in Frameworks */,
@@ -261,21 +258,11 @@
 			name = ActionSheetPicker;
 			sourceTree = "<group>";
 		};
-		9533E497179BDF300042473A /* iRate */ = {
-			isa = PBXGroup;
-			children = (
-				9533E492179BDF250042473A /* iRate.h */,
-				9533E493179BDF250042473A /* iRate.m */,
-			);
-			name = iRate;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		95383BBB17984F2700745084 = {
 			isa = PBXGroup;
 			children = (
+				95CD93AF17B3DE3B00EBF727 /* Soundboard.xcodeproj */,
 				95D83219179B01DC0062A6DF /* MBProgressHUD.xcodeproj */,
-				95383BED17984F3D00745084 /* Soundboard.xcodeproj */,
 				95383BCD17984F2700745084 /* DotA2Soundboard */,
 				95383BC617984F2700745084 /* Frameworks */,
 				95383BC517984F2700745084 /* Products */,
@@ -323,7 +310,6 @@
 				9502FE3717A92C7700F36DE4 /* AFAmazonS3Client */,
 				9567465A179CBEC0002C8710 /* iPhone-IntroductionTutorial */,
 				95D22587179C7E4300639253 /* BlockAlertsAnd-ActionSheets */,
-				9533E497179BDF300042473A /* iRate */,
 				951E70EA179ACEF100E50E06 /* ActionSheetPicker */,
 				9563EDF81799BAFD0003742A /* AFNetworking */,
 				95383BCE17984F2700745084 /* Supporting Files */,
@@ -341,14 +327,6 @@
 				95383BD517984F2700745084 /* DotA2Soundboard-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		95383BEE17984F3D00745084 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				95383BF317984F3D00745084 /* libSoundboard.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		95383BF917984F5F00745084 /* Soundboards */ = {
@@ -423,6 +401,14 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		95CD93B017B3DE3B00EBF727 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95CD93B517B3DE3B00EBF727 /* libSoundboard.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		95D22587179C7E4300639253 /* BlockAlertsAnd-ActionSheets */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,8 +472,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				95CD93B717B3DE6100EBF727 /* PBXTargetDependency */,
 				95D83242179B02AF0062A6DF /* PBXTargetDependency */,
-				95383BF717984F4A00745084 /* PBXTargetDependency */,
 			);
 			name = DotA2Soundboard;
 			productName = DotA2Soundboard;
@@ -521,8 +507,8 @@
 					ProjectRef = 95D83219179B01DC0062A6DF /* MBProgressHUD.xcodeproj */;
 				},
 				{
-					ProductGroup = 95383BEE17984F3D00745084 /* Products */;
-					ProjectRef = 95383BED17984F3D00745084 /* Soundboard.xcodeproj */;
+					ProductGroup = 95CD93B017B3DE3B00EBF727 /* Products */;
+					ProjectRef = 95CD93AF17B3DE3B00EBF727 /* Soundboard.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -533,11 +519,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		95383BF317984F3D00745084 /* libSoundboard.a */ = {
+		95CD93B517B3DE3B00EBF727 /* libSoundboard.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSoundboard.a;
-			remoteRef = 95383BF217984F3D00745084 /* PBXContainerItemProxy */;
+			remoteRef = 95CD93B417B3DE3B00EBF727 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		95D8321E179B01DD0062A6DF /* libMBProgressHUD.a */ = {
@@ -602,7 +588,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				95383BD417984F2700745084 /* main.m in Sources */,
-				9533E495179BDF250042473A /* iRate.m in Sources */,
 				95383BD817984F2700745084 /* D2SBAppDelegate.m in Sources */,
 				95383BE417984F2700745084 /* D2SBMasterViewController.m in Sources */,
 				95383BE717984F2700745084 /* D2SBDetailViewController.m in Sources */,
@@ -631,10 +616,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		95383BF717984F4A00745084 /* PBXTargetDependency */ = {
+		95CD93B717B3DE6100EBF727 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Soundboard;
-			targetProxy = 95383BF617984F4A00745084 /* PBXContainerItemProxy */;
+			targetProxy = 95CD93B617B3DE6100EBF727 /* PBXContainerItemProxy */;
 		};
 		95D83242179B02AF0062A6DF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -722,13 +707,17 @@
 		95383BEB17984F2700745084 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Matteo Pacini (H8D6U37462)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Matteo Pacini (H8D6U37462)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = /Users/matteo/Desktop/testflight;
 				OTHER_LDFLAGS = "-lTestFlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "C7A82954-F0CE-4350-A4C6-9C50528C9637";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C7A82954-F0CE-4350-A4C6-9C50528C9637";
 				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/** /Users/matteo/Desktop/testflight";
 				WRAPPER_EXTENSION = app;
 			};
@@ -737,17 +726,17 @@
 		95383BEC17984F2700745084 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Matteo Pacini (DSM3BQ7EM4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Matteo Pacini (DSM3BQ7EM4)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = /Users/matteo/Desktop/testflight;
 				OTHER_LDFLAGS = "-lTestFlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "0E962F9B-0083-4C87-892A-71C5240D3653";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0E962F9B-0083-4C87-892A-71C5240D3653";
 				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/** /Users/matteo/Desktop/testflight";
 				WRAPPER_EXTENSION = app;
 			};

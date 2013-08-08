@@ -19,3 +19,7 @@
 [submodule "Submodules/AFAmazonS3Client"]
 	path = Submodules/AFAmazonS3Client
 	url = https://github.com/AFNetworking/AFAmazonS3Client.git
+
+[submodule "Submodules/Soundboard"]
+	path = Submodules/Soundboard
+	url = https://github.com/Zi0P4tch0/Soundboard.git
