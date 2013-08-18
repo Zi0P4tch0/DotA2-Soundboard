@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3">
     <dependencies>
-        <deployment version="1280" identifier="iOS"/>
+        <deployment version="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
@@ -44,18 +44,27 @@
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleAspectFit" id="8us-nW-1bh">
-                                            <rect key="frame" x="7" y="4" width="73" height="46"/>
+                                        <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="8us-nW-1bh">
                                             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="46" id="C9y-cl-eGv"/>
+                                                <constraint firstAttribute="width" constant="73" id="xMh-ET-49e"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eIt-69-TUJ">
-                                            <rect key="frame" x="88" y="4" width="222" height="29"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIt-69-TUJ">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="29" id="FUX-3P-dqc"/>
+                                                <constraint firstAttribute="width" constant="222" id="ofY-CL-cWj"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="103" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L9s-lB-7Rk">
-                                            <rect key="frame" x="88" y="29" width="212" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="103" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9s-lB-7Rk">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="Jdt-7S-aaT"/>
+                                                <constraint firstAttribute="width" constant="212" id="zEP-pN-FuB"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,6 +73,14 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="8us-nW-1bh" firstAttribute="top" secondItem="eIt-69-TUJ" secondAttribute="top" type="default" id="2xb-aQ-VhU"/>
+                                    <constraint firstItem="eIt-69-TUJ" firstAttribute="leading" secondItem="8us-nW-1bh" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="DbV-M5-OF6"/>
+                                    <constraint firstItem="L9s-lB-7Rk" firstAttribute="bottom" secondItem="8us-nW-1bh" secondAttribute="bottom" type="default" id="P5v-aZ-F7A"/>
+                                    <constraint firstAttribute="bottom" secondItem="eIt-69-TUJ" secondAttribute="bottom" constant="20" type="default" id="R8n-sf-9NE"/>
+                                    <constraint firstAttribute="trailing" secondItem="L9s-lB-7Rk" secondAttribute="trailing" constant="20" type="default" id="l5E-DL-9Tm"/>
+                                    <constraint firstItem="L9s-lB-7Rk" firstAttribute="leading" secondItem="8us-nW-1bh" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ztq-5Y-Twf"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="f6A-EF-P9g" kind="push" identifier="detail" id="jD1-B7-x0T"/>
                                 </connections>
@@ -114,11 +131,16 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleAspectFit" id="yoJ-sz-pAq">
-                                            <rect key="frame" x="12" y="10" width="84" height="59"/>
+                                        <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="yoJ-sz-pAq">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="59" id="7zv-dg-VNz"/>
+                                                <constraint firstAttribute="width" constant="84" id="jZa-fQ-9eL"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xdh-Lq-lqU">
-                                            <rect key="frame" x="104" y="10" width="196" height="59"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xdh-Lq-lqU">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="196" id="QS6-fo-JPE"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,6 +149,13 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Xdh-Lq-lqU" secondAttribute="trailing" constant="20" type="default" id="KcF-LA-ABY"/>
+                                    <constraint firstItem="yoJ-sz-pAq" firstAttribute="bottom" secondItem="Xdh-Lq-lqU" secondAttribute="bottom" type="default" id="l2B-8o-dgr"/>
+                                    <constraint firstItem="Xdh-Lq-lqU" firstAttribute="leading" secondItem="yoJ-sz-pAq" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="qPe-h3-vyZ"/>
+                                    <constraint firstItem="Xdh-Lq-lqU" firstAttribute="top" secondItem="yoJ-sz-pAq" secondAttribute="top" type="default" id="tM0-Ee-kPF"/>
+                                    <constraint firstItem="yoJ-sz-pAq" firstAttribute="top" secondItem="ofV-Ok-Hw4" secondAttribute="top" constant="10" id="wsa-V4-hNY"/>
+                                </constraints>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -175,6 +204,9 @@
                 <relationship kind="action" name="addSoundboard:"/>
                 <relationship kind="outlet" name="addSoundboardButton" candidateClass="UIBarButtonItem"/>
             </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

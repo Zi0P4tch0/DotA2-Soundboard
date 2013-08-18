@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9533E494179BDF250042473A /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9533E491179BDF250042473A /* iRate.bundle */; };
 		9533E499179BE0000042473A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9533E498179BE0000042473A /* StoreKit.framework */; };
 		95383BC817984F2700745084 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383BC717984F2700745084 /* UIKit.framework */; };
 		95383BCA17984F2700745084 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383BC917984F2700745084 /* Foundation.framework */; };
@@ -114,7 +113,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9533E491179BDF250042473A /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = iRate.bundle; path = ../Submodules/iRate/iRate/iRate.bundle; sourceTree = "<group>"; };
 		9533E498179BE0000042473A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		95383BC417984F2700745084 /* DotA2Soundboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotA2Soundboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95383BC717984F2700745084 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -320,7 +318,6 @@
 		95383BCE17984F2700745084 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9533E491179BDF250042473A /* iRate.bundle */,
 				95383BCF17984F2700745084 /* DotA2Soundboard-Info.plist */,
 				95383BD017984F2700745084 /* InfoPlist.strings */,
 				95383BD317984F2700745084 /* main.m */,
@@ -550,7 +547,6 @@
 				95A7A760179A1267005C0035 /* background.png in Resources */,
 				95A7A761179A1267005C0035 /* background@2x.png in Resources */,
 				95DA1E57179B4C9300FC2817 /* Announcer.sb in Resources */,
-				9533E494179BDF250042473A /* iRate.bundle in Resources */,
 				95D2259F179C7ED300639253 /* alert-black-button.png in Resources */,
 				95D225A0179C7ED300639253 /* alert-black-button@2x.png in Resources */,
 				95D225A1179C7ED300639253 /* alert-gray-button.png in Resources */,
@@ -712,7 +708,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = /Users/matteo/Desktop/testflight;
 				OTHER_LDFLAGS = "-lTestFlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -731,7 +727,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = /Users/matteo/Desktop/testflight;
 				OTHER_LDFLAGS = "-lTestFlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";

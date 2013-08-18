@@ -400,20 +400,9 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
+    static NSString *CellIdentifier = @"Cell";
     
-    if (SYSTEM_VERSION_GREATER_THAN(@"6.0"))
-    {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    }
-    else
-    {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        }
-    }
+    cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     Soundboard *soundboard = _soundboards[indexPath.row];
     

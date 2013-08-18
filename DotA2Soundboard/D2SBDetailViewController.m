@@ -86,7 +86,7 @@
     CGFloat searchBarHeight = searchBarFrame.size.height;
     CGPoint offsetFrame = CGPointMake(0,searchBarHeight);
     [self.tableView setContentOffset:offsetFrame];
-    
+        
     //Handle request
     if (requestedClip >= 0 && requestedClip <= [_clipsTitles count]-1)
     {
@@ -344,25 +344,15 @@
 {
     
     UITableViewCell *cell = nil;
+    static NSString *CellIdentifier = @"Cell";
     
-    if (SYSTEM_VERSION_GREATER_THAN(@"6.0"))
-    {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    }
-    else
-    {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        }
-    }
-        
+    cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
     //Clip title
     UILabel *clipTitleLabel = (UILabel*)[cell viewWithTag:101];
     clipTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     clipTitleLabel.numberOfLines = 5;
+    
     if (tableView == self.searchDisplayController.searchResultsTableView)
     {
         [clipTitleLabel setText:[NSString stringWithFormat:@"\"%@\"",[_searchedClips objectAtIndex:indexPath.row]]];
