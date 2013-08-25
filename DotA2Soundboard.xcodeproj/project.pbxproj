@@ -25,6 +25,7 @@
 		953E6A5D17A7D192000EC8AB /* magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 953E6A5B17A7D192000EC8AB /* magnify.png */; };
 		953E6A5E17A7D192000EC8AB /* magnify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 953E6A5C17A7D192000EC8AB /* magnify@2x.png */; };
 		9544DB7A17A8B04D00910B8B /* AFAmazonS3Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 9544DB7917A8B04D00910B8B /* AFAmazonS3Client.m */; };
+		9545CE6617C9E856009DEAFB /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545CE6517C9E856009DEAFB /* Base64.m */; };
 		954CCE8A179B03910044477C /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D8321E179B01DD0062A6DF /* libMBProgressHUD.a */; };
 		955DE6E517A4195D00147EFD /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 955DE6E417A4195D00147EFD /* Icon@2x.png */; };
 		955DE6E717A4196100147EFD /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 955DE6E617A4196100147EFD /* Icon.png */; };
@@ -89,25 +90,11 @@
 			remoteGlobalIDString = 95383B8717984E9400745084;
 			remoteInfo = Soundboard;
 		};
-		95CD93B617B3DE6100EBF727 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95CD93AF17B3DE3B00EBF727 /* Soundboard.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 95383B8617984E9400745084;
-			remoteInfo = Soundboard;
-		};
 		95D8321D179B01DD0062A6DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 95D83219179B01DC0062A6DF /* MBProgressHUD.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D286A7491518C70F00E13FB8;
-			remoteInfo = MBProgressHUD;
-		};
-		95D83241179B02AF0062A6DF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95D83219179B01DC0062A6DF /* MBProgressHUD.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D286A7481518C70F00E13FB8;
 			remoteInfo = MBProgressHUD;
 		};
 /* End PBXContainerItemProxy section */
@@ -137,6 +124,7 @@
 		953E6A5B17A7D192000EC8AB /* magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = magnify.png; path = DotA2Soundboard/magnify.png; sourceTree = "<group>"; };
 		953E6A5C17A7D192000EC8AB /* magnify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "magnify@2x.png"; path = "DotA2Soundboard/magnify@2x.png"; sourceTree = "<group>"; };
 		9544DB7917A8B04D00910B8B /* AFAmazonS3Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFAmazonS3Client.m; path = ../Submodules/AFAmazonS3Client/AFAmazonS3Client/AFAmazonS3Client.m; sourceTree = "<group>"; };
+		9545CE6517C9E856009DEAFB /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../Submodules/Base64/Base64/Base64.m; sourceTree = "<group>"; };
 		955DE6E417A4195D00147EFD /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		955DE6E617A4196100147EFD /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		955DE6E817A4197100147EFD /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -305,6 +293,7 @@
 				95383BE317984F2700745084 /* D2SBMasterViewController.m */,
 				95383BE517984F2700745084 /* D2SBDetailViewController.h */,
 				95383BE617984F2700745084 /* D2SBDetailViewController.m */,
+				9545CE6717C9E85C009DEAFB /* Base64 */,
 				9502FE3717A92C7700F36DE4 /* AFAmazonS3Client */,
 				9567465A179CBEC0002C8710 /* iPhone-IntroductionTutorial */,
 				95D22587179C7E4300639253 /* BlockAlertsAnd-ActionSheets */,
@@ -333,6 +322,14 @@
 				9565AA291799B09400DEE611 /* heroes.xml */,
 			);
 			name = Soundboards;
+			sourceTree = "<group>";
+		};
+		9545CE6717C9E85C009DEAFB /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				9545CE6517C9E856009DEAFB /* Base64.m */,
+			);
+			name = Base64;
 			sourceTree = "<group>";
 		};
 		9563EDF81799BAFD0003742A /* AFNetworking */ = {
@@ -469,8 +466,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				95CD93B717B3DE6100EBF727 /* PBXTargetDependency */,
-				95D83242179B02AF0062A6DF /* PBXTargetDependency */,
 			);
 			name = DotA2Soundboard;
 			productName = DotA2Soundboard;
@@ -494,6 +489,7 @@
 			knownRegions = (
 				en,
 				it,
+				English,
 			);
 			mainGroup = 95383BBB17984F2700745084;
 			productRefGroup = 95383BC517984F2700745084 /* Products */;
@@ -606,23 +602,11 @@
 				95674657179CBEB9002C8710 /* MYIntroductionPanel.m in Sources */,
 				95674658179CBEB9002C8710 /* MYIntroductionView.m in Sources */,
 				9544DB7A17A8B04D00910B8B /* AFAmazonS3Client.m in Sources */,
+				9545CE6617C9E856009DEAFB /* Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		95CD93B717B3DE6100EBF727 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Soundboard;
-			targetProxy = 95CD93B617B3DE6100EBF727 /* PBXContainerItemProxy */;
-		};
-		95D83242179B02AF0062A6DF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MBProgressHUD;
-			targetProxy = 95D83241179B02AF0062A6DF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		95383BD017984F2700745084 /* InfoPlist.strings */ = {
