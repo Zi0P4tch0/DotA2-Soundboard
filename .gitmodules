@@ -23,3 +23,6 @@
 [submodule "Submodules/Soundboard"]
 	path = Submodules/Soundboard
 	url = https://github.com/Zi0P4tch0/Soundboard.git
+[submodule "Submodules/Base64"]
+	path = Submodules/Base64
+	url = https://github.com/nicklockwood/Base64.git

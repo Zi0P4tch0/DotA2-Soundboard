@@ -29,6 +29,8 @@
 #import "Soundboard.h"
 
 #define S3_BASE_URL @"https://s3-eu-west-1.amazonaws.com/d2sb/"
+#define AS3K "QUtJQUk1UFpaNkxWNFJITFdXV1E="
+#define AS3S "ZE9HWHNPKzdmZStwQk5sNXRmSXU1L2RMaGltaU83UThpN2YxMGhyeA=="
 
 typedef enum {
     
@@ -232,6 +234,8 @@ typedef enum {
         downloadOperation = [[AFAmazonS3Client alloc]
                              initWithAccessKeyID:@"AKIAI5PZZ6LV4RHLWWWQ"
                              secret:@"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"];
+        
+        downloadOperation = [[AFAmazonS3Client alloc] init];
         downloadOperation.bucket = @"d2sb";
         
         NSString *output = [SOUNDBOARDS_DIR stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sb",refinedValue]];
