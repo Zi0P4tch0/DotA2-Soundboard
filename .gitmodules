@@ -7,9 +7,6 @@
 [submodule "Submodules/ActionSheetPicker"]
 	path = Submodules/ActionSheetPicker
 	url = https://github.com/TimCinel/ActionSheetPicker.git
-[submodule "Submodules/iRate"]
-	path = Submodules/iRate
-	url = https://github.com/nicklockwood/iRate.git
 [submodule "Submodules/BlockAlertsAnd-ActionSheets"]
 	path = Submodules/BlockAlertsAnd-ActionSheets
 	url = https://github.com/falkobuttler/BlockAlertsAnd-ActionSheets.git
@@ -19,7 +16,6 @@
 [submodule "Submodules/AFAmazonS3Client"]
 	path = Submodules/AFAmazonS3Client
 	url = https://github.com/AFNetworking/AFAmazonS3Client.git
-
 [submodule "Submodules/Soundboard"]
 	path = Submodules/Soundboard
 	url = https://github.com/Zi0P4tch0/Soundboard.git
