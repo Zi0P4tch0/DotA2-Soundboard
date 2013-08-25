@@ -653,7 +653,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -677,7 +677,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -692,7 +692,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = /Users/matteo/Desktop/testflight;
 				OTHER_LDFLAGS = "-lTestFlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -706,17 +706,17 @@
 		95383BEC17984F2700745084 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Matteo Pacini (DSM3BQ7EM4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Matteo Pacini (DSM3BQ7EM4)";
+				CODE_SIGN_IDENTITY = Jailbreak;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = Jailbreak;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = /Users/matteo/Desktop/testflight;
 				OTHER_LDFLAGS = "-lTestFlight";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0E962F9B-0083-4C87-892A-71C5240D3653";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0E962F9B-0083-4C87-892A-71C5240D3653";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/** /Users/matteo/Desktop/testflight";
 				WRAPPER_EXTENSION = app;
 			};

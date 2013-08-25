@@ -357,7 +357,20 @@
     UITableViewCell *cell = nil;
     static NSString *CellIdentifier = @"Cell";
     
-    cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    if (SYSTEM_VERSION_LESS_THAN(@"6.0"))
+    {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+    }
+    else
+    {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        
+    }
     
     //Clip title
     UILabel *clipTitleLabel = (UILabel*)[cell viewWithTag:101];
