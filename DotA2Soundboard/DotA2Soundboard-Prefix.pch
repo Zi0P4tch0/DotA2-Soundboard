@@ -27,7 +27,7 @@
 
 #import "TestFlight.h"
 
-//#define USE_TESTFLIGHT
+#define USE_TESTFLIGHT
 
 #ifdef USE_TESTFLIGHT
     #define NSLog TFLog

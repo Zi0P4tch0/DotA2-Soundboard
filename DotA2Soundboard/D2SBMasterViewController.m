@@ -51,6 +51,7 @@ typedef enum {
 @implementation D2SBMasterViewController
 
 @synthesize addSoundboardButton;
+@synthesize donateButton;
 @synthesize downloadOperation;
 @synthesize urlRequestParameters;
 @synthesize isDownloading;
@@ -99,6 +100,7 @@ typedef enum {
         NSLog(@"Showing tutorial / Disabling \"addSoundboard\" button");
         
         [addSoundboardButton setEnabled:NO];
+        [donateButton setEnabled:NO];
         
         MYIntroductionPanel *panelOne = [[MYIntroductionPanel alloc]
                                          initWithimage:nil
@@ -114,11 +116,16 @@ typedef enum {
                                          initWithimage:nil
                                          title:NSLocalizedString(@"That's it!",nil)
                                          description:NSLocalizedString(@"Click on a soundboard to open it.\nA list of the available clips will appear.\n\nSearch a clip by scrolling down the list or using the top search bar.\n\nTo play a clip, just click on it!\n\nTo view clip sharing options, just hold your finger on a clip for 1-2 seconds.",nil)];
+        
+        MYIntroductionPanel *panelFour = [[MYIntroductionPanel alloc]
+                                          initWithimage:[UIImage imageNamed:@"piggy-bank"]
+                                          title:nil
+                                          description:NSLocalizedString(@"Hi there!\n\nI'm a 25yo fan of DotA2. I've created this App to spam heroes sounds to my friends.\n\nPlease help me paying servers and keeping my mug filled by donating.\n\nThank you, have fun!",nil)];
     
         MYIntroductionView *introductionView = [[MYIntroductionView alloc]
                                                 initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
                                                 headerImage:nil
-                                                panels:@[panelOne,panelTwo,panelThree]];
+                                                panels:@[panelOne,panelTwo,panelThree,panelFour]];
         
         introductionView.delegate = self;
                 
@@ -133,6 +140,9 @@ typedef enum {
         NSLog(@"No need to show tutorial");
     }
     
+    [PayPalPaymentViewController setEnvironment:PayPalEnvironmentProduction];
+
+    
 }
 
 #pragma mark - Introduction view methods
@@ -142,6 +152,7 @@ typedef enum {
     NSLog(@"End of tutorial / Enabling addSoundboard button");
     
     [addSoundboardButton setEnabled:YES];
+    [donateButton setEnabled:YES];
 }
 
 #pragma mark - Soundboard related methods
@@ -227,6 +238,7 @@ typedef enum {
     hud.progress = 0;
     
     [addSoundboardButton setEnabled:NO];
+    [donateButton setEnabled:NO];
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         
@@ -271,6 +283,7 @@ typedef enum {
                                         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                         [weakSelf reloadSoundboards];
                                         [weakSelf.addSoundboardButton setEnabled:YES];
+                                        [weakSelf.donateButton setEnabled:YES];
                                         
                                     });
                                     
@@ -298,6 +311,7 @@ typedef enum {
                                         
                                         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                         [weakSelf.addSoundboardButton setEnabled:YES];
+                                        [weakSelf.donateButton setEnabled:YES];
                                         
                                     });
                                     
@@ -506,6 +520,57 @@ typedef enum {
     {
         [_heroes addObject:[attributeDict valueForKey:@"name"]];
     }
+}
+
+#pragma mark - Paypal methods
+
+-(IBAction)donate:(id)sender
+{
+    PayPalPayment *payment = [[PayPalPayment alloc] init];
+    payment.amount = [[NSDecimalNumber alloc] initWithString:@"0.98"];
+    payment.currencyCode = @"GBP";
+    payment.shortDescription = @"D2SB Donation";
+    
+    if (!payment.processable)
+    {
+        return;
+    }
+    
+    [PayPalPaymentViewController setEnvironment:PayPalEnvironmentNoNetwork];
+    
+    
+    // Create a PayPalPaymentViewController with the credentials and payerId, the PayPalPayment
+    // from the previous step, and a PayPalPaymentDelegate to handle the results.
+    PayPalPaymentViewController *paymentViewController;
+    paymentViewController = [[PayPalPaymentViewController alloc]      initWithClientId:@"ARRoCBDLWOKiOwefhHiOMCopt1knP7bKr18jdlQCy7K8qQFoFxBU56dKWkyY"
+                                                                    receiverEmail:@"ispeakprogramming@gmail.com"
+                                                                          payerId:nil
+                                                                          payment:payment
+                                                                         delegate:self];
+    
+    // Present the PayPalPaymentViewController.
+    [self presentViewController:paymentViewController animated:YES completion:nil];
+}
+
+- (void)payPalPaymentDidComplete:(PayPalPayment *)completedPayment {
+    
+    [self dismissViewControllerAnimated:YES completion:^(){
+        
+        BlockAlertView *alert = [[BlockAlertView alloc]
+                                 initWithTitle:NSLocalizedString(@"You're The Best!",nil)
+                                 message:NSLocalizedString(@"Many thanks for your donation.\nI wish you well!",nil)];
+        
+        [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
+        
+        [alert show];
+        
+    }];
+
+}
+
+- (void)payPalPaymentDidCancel {
+    // The payment was canceled; dismiss the PayPalPaymentViewController.
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

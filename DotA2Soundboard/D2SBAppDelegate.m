@@ -32,7 +32,7 @@
     #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     #pragma clang diagnostic pop
-    [TestFlight takeOff:@"659ef634-3c4a-4585-946a-c08503f14f6a"];
+    [TestFlight takeOff:@"199939d9-306c-42a5-b564-567df94977bf"];
     #endif
     
     //Delete temporary files

@@ -21,6 +21,7 @@
 
 #import "AFAmazonS3Client.h"
 #import "MYIntroductionView.h"
+#import "PayPalMobile.h"
 
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define SOUNDBOARDS_DIR [DOCUMENTS stringByAppendingPathComponent:@"Soundboards"]
@@ -28,9 +29,11 @@
 
 #define HEROES_NO 102
 
-@interface D2SBMasterViewController : UITableViewController <NSXMLParserDelegate,MYIntroductionDelegate>
+@interface D2SBMasterViewController : UITableViewController <NSXMLParserDelegate,MYIntroductionDelegate,PayPalPaymentDelegate>
 
 @property (nonatomic,strong) IBOutlet UIBarButtonItem *addSoundboardButton;
+@property (nonatomic,strong) IBOutlet UIBarButtonItem *donateButton;
+
 @property (nonatomic,strong) AFAmazonS3Client *downloadOperation;
 @property (nonatomic,assign) BOOL isDownloading;
 
@@ -42,5 +45,7 @@
 
 -(BOOL)heroExists:(NSString*)heroName;
 -(BOOL)isSoundboardAvailable:(NSString*)heroName;
+
+-(IBAction)donate:(id)sender;
 
 @end
