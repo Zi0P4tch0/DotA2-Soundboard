@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9509928017CCD9FC00E7EBF7 /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9509927C17CCD9FC00E7EBF7 /* libPayPalMobile.a */; };
+		9509929217CCDB0D00E7EBF7 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9509928C17CCDB0D00E7EBF7 /* libTestFlight.a */; };
+		9509929317CCDB0D00E7EBF7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9509928D17CCDB0D00E7EBF7 /* README.md */; };
+		9509929417CCDB0D00E7EBF7 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 9509928E17CCDB0D00E7EBF7 /* release_notes.md */; };
 		9533E499179BE0000042473A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9533E498179BE0000042473A /* StoreKit.framework */; };
 		95383BC817984F2700745084 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383BC717984F2700745084 /* UIKit.framework */; };
 		95383BCA17984F2700745084 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95383BC917984F2700745084 /* Foundation.framework */; };
@@ -26,7 +30,6 @@
 		953E6A5E17A7D192000EC8AB /* magnify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 953E6A5C17A7D192000EC8AB /* magnify@2x.png */; };
 		9544DB7A17A8B04D00910B8B /* AFAmazonS3Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 9544DB7917A8B04D00910B8B /* AFAmazonS3Client.m */; };
 		9545CE6617C9E856009DEAFB /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9545CE6517C9E856009DEAFB /* Base64.m */; };
-		9549582117CBE60D00F7C2B6 /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9549581D17CBE60D00F7C2B6 /* libPayPalMobile.a */; };
 		9549582317CBE6DB00F7C2B6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9549582217CBE6DB00F7C2B6 /* AudioToolbox.framework */; };
 		9549582517CBE6E700F7C2B6 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9549582417CBE6E700F7C2B6 /* CoreMedia.framework */; };
 		9549582717CBE6EB00F7C2B6 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9549582617CBE6EB00F7C2B6 /* CoreVideo.framework */; };
@@ -109,6 +112,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9509927C17CCD9FC00E7EBF7 /* libPayPalMobile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPayPalMobile.a; sourceTree = "<group>"; };
+		9509927D17CCD9FC00E7EBF7 /* PayPalMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalMobile.h; sourceTree = "<group>"; };
+		9509927E17CCD9FC00E7EBF7 /* PayPalPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalPayment.h; sourceTree = "<group>"; };
+		9509927F17CCD9FC00E7EBF7 /* PayPalPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalPaymentViewController.h; sourceTree = "<group>"; };
+		9509928C17CCDB0D00E7EBF7 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		9509928D17CCDB0D00E7EBF7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9509928E17CCDB0D00E7EBF7 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		9509928F17CCDB0D00E7EBF7 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		9509929017CCDB0D00E7EBF7 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		9509929117CCDB0D00E7EBF7 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		9533E498179BE0000042473A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		95383BC417984F2700745084 /* DotA2Soundboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DotA2Soundboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95383BC717984F2700745084 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -134,10 +147,6 @@
 		953E6A5C17A7D192000EC8AB /* magnify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "magnify@2x.png"; path = "DotA2Soundboard/magnify@2x.png"; sourceTree = "<group>"; };
 		9544DB7917A8B04D00910B8B /* AFAmazonS3Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFAmazonS3Client.m; path = ../Submodules/AFAmazonS3Client/AFAmazonS3Client/AFAmazonS3Client.m; sourceTree = "<group>"; };
 		9545CE6517C9E856009DEAFB /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../Submodules/Base64/Base64/Base64.m; sourceTree = "<group>"; };
-		9549581D17CBE60D00F7C2B6 /* libPayPalMobile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPayPalMobile.a; sourceTree = "<group>"; };
-		9549581E17CBE60D00F7C2B6 /* PayPalMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalMobile.h; sourceTree = "<group>"; };
-		9549581F17CBE60D00F7C2B6 /* PayPalPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalPayment.h; sourceTree = "<group>"; };
-		9549582017CBE60D00F7C2B6 /* PayPalPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalPaymentViewController.h; sourceTree = "<group>"; };
 		9549582217CBE6DB00F7C2B6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9549582417CBE6E700F7C2B6 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		9549582617CBE6EB00F7C2B6 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -246,7 +255,8 @@
 				95383BC817984F2700745084 /* UIKit.framework in Frameworks */,
 				95383BCA17984F2700745084 /* Foundation.framework in Frameworks */,
 				95383BCC17984F2700745084 /* CoreGraphics.framework in Frameworks */,
-				9549582117CBE60D00F7C2B6 /* libPayPalMobile.a in Frameworks */,
+				9509928017CCD9FC00E7EBF7 /* libPayPalMobile.a in Frameworks */,
+				9509929217CCDB0D00E7EBF7 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +269,48 @@
 				9544DB7917A8B04D00910B8B /* AFAmazonS3Client.m */,
 			);
 			name = AFAmazonS3Client;
+			sourceTree = "<group>";
+		};
+		9509927B17CCD9FC00E7EBF7 /* PayPalMobile */ = {
+			isa = PBXGroup;
+			children = (
+				9509927C17CCD9FC00E7EBF7 /* libPayPalMobile.a */,
+				9509927D17CCD9FC00E7EBF7 /* PayPalMobile.h */,
+				9509927E17CCD9FC00E7EBF7 /* PayPalPayment.h */,
+				9509927F17CCD9FC00E7EBF7 /* PayPalPaymentViewController.h */,
+			);
+			name = PayPalMobile;
+			path = ../PayPalMobile;
+			sourceTree = "<group>";
+		};
+		9509928B17CCDB0D00E7EBF7 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				9509928C17CCDB0D00E7EBF7 /* libTestFlight.a */,
+				9509928D17CCDB0D00E7EBF7 /* README.md */,
+				9509928E17CCDB0D00E7EBF7 /* release_notes.md */,
+				9509928F17CCDB0D00E7EBF7 /* TestFlight+AsyncLogging.h */,
+				9509929017CCDB0D00E7EBF7 /* TestFlight+ManualSessions.h */,
+				9509929117CCDB0D00E7EBF7 /* TestFlight.h */,
+			);
+			name = TestFlight;
+			path = ../TestFlight;
+			sourceTree = "<group>";
+		};
+		9509929517CCDBBE00E7EBF7 /* 3rd Party */ = {
+			isa = PBXGroup;
+			children = (
+				9545CE6717C9E85C009DEAFB /* Base64 */,
+				9502FE3717A92C7700F36DE4 /* AFAmazonS3Client */,
+				9567465A179CBEC0002C8710 /* iPhone-IntroductionTutorial */,
+				95D22587179C7E4300639253 /* BlockAlertsAnd-ActionSheets */,
+				951E70EA179ACEF100E50E06 /* ActionSheetPicker */,
+				9563EDF81799BAFD0003742A /* AFNetworking */,
+				95383BCE17984F2700745084 /* Supporting Files */,
+				9509927B17CCD9FC00E7EBF7 /* PayPalMobile */,
+				9509928B17CCDB0D00E7EBF7 /* TestFlight */,
+			);
+			name = "3rd Party";
 			sourceTree = "<group>";
 		};
 		951E70EA179ACEF100E50E06 /* ActionSheetPicker */ = {
@@ -327,14 +379,7 @@
 				95383BE317984F2700745084 /* D2SBMasterViewController.m */,
 				95383BE517984F2700745084 /* D2SBDetailViewController.h */,
 				95383BE617984F2700745084 /* D2SBDetailViewController.m */,
-				9545CE6717C9E85C009DEAFB /* Base64 */,
-				9502FE3717A92C7700F36DE4 /* AFAmazonS3Client */,
-				9567465A179CBEC0002C8710 /* iPhone-IntroductionTutorial */,
-				95D22587179C7E4300639253 /* BlockAlertsAnd-ActionSheets */,
-				951E70EA179ACEF100E50E06 /* ActionSheetPicker */,
-				9563EDF81799BAFD0003742A /* AFNetworking */,
-				9549581C17CBE60D00F7C2B6 /* PayPalMobile */,
-				95383BCE17984F2700745084 /* Supporting Files */,
+				9509929517CCDBBE00E7EBF7 /* 3rd Party */,
 			);
 			path = DotA2Soundboard;
 			sourceTree = "<group>";
@@ -365,18 +410,6 @@
 				9545CE6517C9E856009DEAFB /* Base64.m */,
 			);
 			name = Base64;
-			sourceTree = "<group>";
-		};
-		9549581C17CBE60D00F7C2B6 /* PayPalMobile */ = {
-			isa = PBXGroup;
-			children = (
-				9549581D17CBE60D00F7C2B6 /* libPayPalMobile.a */,
-				9549581E17CBE60D00F7C2B6 /* PayPalMobile.h */,
-				9549581F17CBE60D00F7C2B6 /* PayPalPayment.h */,
-				9549582017CBE60D00F7C2B6 /* PayPalPaymentViewController.h */,
-			);
-			name = PayPalMobile;
-			path = "../../PayPal-iOS-SDK-master/PayPalMobile";
 			sourceTree = "<group>";
 		};
 		9563EDF81799BAFD0003742A /* AFNetworking */ = {
@@ -620,6 +653,8 @@
 				953E6A5E17A7D192000EC8AB /* magnify@2x.png in Resources */,
 				9549583017CBE90E00F7C2B6 /* piggy-bank.png in Resources */,
 				9549583117CBE90E00F7C2B6 /* piggy-bank@2x.png in Resources */,
+				9509929317CCDB0D00E7EBF7 /* README.md in Resources */,
+				9509929417CCDB0D00E7EBF7 /* release_notes.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,23 +775,23 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Matteo Pacini (H8D6U37462)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Matteo Pacini (H8D6U37462)";
+				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/matteo/Desktop/testflight,
-					"\"$(SRCROOT)/../PayPal-iOS-SDK-master/PayPalMobile\"",
+					"\"$(SRCROOT)/PayPalMobile\"",
+					"\"$(SRCROOT)/TestFlight\"",
 				);
 				OTHER_LDFLAGS = (
-					"-lTestFlight",
 					"-lc++",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C7A82954-F0CE-4350-A4C6-9C50528C9637";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C7A82954-F0CE-4350-A4C6-9C50528C9637";
-				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/** /Users/matteo/Desktop/testflight";
+				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/DotA2Soundboard/Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -766,23 +801,23 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = Jailbreak;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = Jailbreak;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DotA2Soundboard/DotA2Soundboard-Prefix.pch";
 				INFOPLIST_FILE = "DotA2Soundboard/DotA2Soundboard-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/matteo/Desktop/testflight,
-					"\"$(SRCROOT)/../PayPal-iOS-SDK-master/PayPalMobile\"",
+					"\"$(SRCROOT)/PayPalMobile\"",
+					"\"$(SRCROOT)/TestFlight\"",
 				);
 				OTHER_LDFLAGS = (
-					"-lTestFlight",
 					"-lc++",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/Soundboard/Soundboard /Users/matteo/Desktop/DotA2Soundboard/Submodules/** /Users/matteo/Desktop/testflight";
+				USER_HEADER_SEARCH_PATHS = "/Users/matteo/Desktop/DotA2Soundboard/Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
