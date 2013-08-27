@@ -1,22 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-//  This file is part of DotA2Soundboard.                                    //
-//                                                                           //
-//  DotA2Soundboard is free software: you can redistribute it and/or modify  //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation, either version 3 of the License, or        //
-//  any later version.                                                       //
-//                                                                           //
-//  DotA2Soundboard is distributed in the hope that it will be useful,       //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with DotA2Soundboard.  If not, see <http://www.gnu.org/licenses/>. //
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-
 #import "D2SBMasterViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -97,7 +78,7 @@ typedef enum {
         
     if (!tutorialShown)
     {
-        NSLog(@"Showing tutorial / Disabling \"addSoundboard\" button");
+        NSLog(@"Showing tutorial / Disabling \"addSoundboard\" & \"donate\" buttons");
         
         [addSoundboardButton setEnabled:NO];
         [donateButton setEnabled:NO];
@@ -140,8 +121,7 @@ typedef enum {
         NSLog(@"No need to show tutorial");
     }
     
-    [PayPalPaymentViewController setEnvironment:PayPalEnvironmentProduction];
-
+    [PayPalPaymentViewController setEnvironment:PayPalEnvironmentNoNetwork];
     
 }
 
@@ -149,7 +129,7 @@ typedef enum {
 
 -(void)introductionDidFinishWithType:(MYFinishType)finishType
 {
-    NSLog(@"End of tutorial / Enabling addSoundboard button");
+    NSLog(@"End of tutorial / Enabling \"addSoundboard\" & \"donate\" button");
     
     [addSoundboardButton setEnabled:YES];
     [donateButton setEnabled:YES];
@@ -183,16 +163,6 @@ typedef enum {
     NSLog(@"Reloading soundboards...");
     
     _soundboards = [[NSMutableArray alloc] init];
-    
-    //Folder check
-    if (![[NSFileManager defaultManager] fileExistsAtPath:SOUNDBOARDS_DIR])
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:SOUNDBOARDS_DIR withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    if (![[NSFileManager defaultManager] fileExistsAtPath:RINGTONES_DIR])
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:RINGTONES_DIR withIntermediateDirectories:YES attributes:nil error:nil];
-    }
     
     //Announcer soundboard check
     NSString *announcerSoundboardPath = [SOUNDBOARDS_DIR stringByAppendingPathComponent:@"Announcer.sb"];
@@ -459,7 +429,7 @@ typedef enum {
     
     //Hero Image
     UIImageView *heroImageView = (UIImageView*)[cell viewWithTag:102];
-    NSString *iconFile = [NSString stringWithFormat:@"%@%@.png",NSTemporaryDirectory(),[soundboard name]];
+    NSString *iconFile = [NSString stringWithFormat:@"%@%@.png",TMP_DIR,[soundboard name]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:iconFile])
     {
@@ -536,8 +506,7 @@ typedef enum {
         return;
     }
     
-    [PayPalPaymentViewController setEnvironment:PayPalEnvironmentNoNetwork];
-    
+    [PayPalPaymentViewController setEnvironment:PayPalEnvironmentProduction];
     
     // Create a PayPalPaymentViewController with the credentials and payerId, the PayPalPayment
     // from the previous step, and a PayPalPaymentDelegate to handle the results.

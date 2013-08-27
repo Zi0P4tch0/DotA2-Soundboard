@@ -1,27 +1,9 @@
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-//  This file is part of DotA2Soundboard.                                    //
-//                                                                           //
-//  DotA2Soundboard is free software: you can redistribute it and/or modify  //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation, either version 3 of the License, or        //
-//  any later version.                                                       //
-//                                                                           //
-//  DotA2Soundboard is distributed in the hope that it will be useful,       //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with DotA2Soundboard.  If not, see <http://www.gnu.org/licenses/>. //
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-
 #import "D2SBDetailViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "D2SBAppDelegate.h"
 #import "BlockAlertView.h"
 #import "D2SBMasterViewController.h"
 #import "MBProgressHUD.h"
@@ -60,18 +42,12 @@
         //iPhone5
         NSString *image = [[NSBundle mainBundle] pathForResource:@"background-568h@2x" ofType:@"png"];
         self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:image]];
-        //self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithContentsOfFile:image]];
     }
     else
     {
         //Other iPhones
         self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-        //self.searchDisplayController.searchResultsTableView.backgroundColor  = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     }
-    
-    //self.searchDisplayController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //self.searchDisplayController.searchResultsTableView.rowHeight = self.tableView.rowHeight;
-    //self.searchDisplayController.searchResultsTableView.bounces = NO;
     
     self.navigationItem.title = [soundboard name];
     
@@ -150,7 +126,7 @@
         
         BlockAlertView *alert = [[BlockAlertView alloc]
                                  initWithTitle:NSLocalizedString(@"Success!",nil)
-                                 message:NSLocalizedString(@"Clip has been saved to D2SB Documents!\n\nConnect your device to iTunes and go to the App section to retrieve the saved content.",nil)];
+                                 message:[NSString stringWithFormat:NSLocalizedString(@"Clip has been saved to \"%@\"!.",nil),RINGTONES_DIR]];
         
         [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
         
@@ -194,7 +170,7 @@
     if ([buttonTitle isEqualToString:NSLocalizedString(@"Share Clip (WhatsApp)",nil)])
     {
         NSData *clipData = [soundboard clipDataFromClipAtIndex:_pressedClipIndex];
-        NSString *output = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@ - \"%@\".waa",[soundboard name],[soundboard clipTitleAtIndex:_pressedClipIndex]]];
+        NSString *output = [TMP_DIR stringByAppendingPathComponent:[NSString stringWithFormat:@"%@ - \"%@\".waa",[soundboard name],[soundboard clipTitleAtIndex:_pressedClipIndex]]];
         
         [clipData writeToFile:output atomically:YES];
         
@@ -319,7 +295,7 @@
         [player stop];
     }
     
-    NSString* clipFile =  [NSString stringWithFormat:@"%@clip.mp3", NSTemporaryDirectory()];
+    NSString* clipFile =  [NSString stringWithFormat:@"%@clip.mp3", TMP_DIR];
     [clipData writeToFile:clipFile atomically:NO];
     
     NSError *error;
@@ -389,7 +365,7 @@
     
     //Hero image
     UIImageView *heroImageView = (UIImageView*)[cell viewWithTag:102];
-    NSString *iconFile = [NSString stringWithFormat:@"%@%@.png",NSTemporaryDirectory(),[soundboard name]];
+    NSString *iconFile = [NSString stringWithFormat:@"%@%@.png",TMP_DIR,[soundboard name]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:iconFile])
     {

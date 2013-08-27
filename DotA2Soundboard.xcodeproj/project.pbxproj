@@ -306,7 +306,6 @@
 				95D22587179C7E4300639253 /* BlockAlertsAnd-ActionSheets */,
 				951E70EA179ACEF100E50E06 /* ActionSheetPicker */,
 				9563EDF81799BAFD0003742A /* AFNetworking */,
-				95383BCE17984F2700745084 /* Supporting Files */,
 				9509927B17CCD9FC00E7EBF7 /* PayPalMobile */,
 				9509928B17CCDB0D00E7EBF7 /* TestFlight */,
 			);
@@ -379,6 +378,7 @@
 				95383BE317984F2700745084 /* D2SBMasterViewController.m */,
 				95383BE517984F2700745084 /* D2SBDetailViewController.h */,
 				95383BE617984F2700745084 /* D2SBDetailViewController.m */,
+				95383BCE17984F2700745084 /* Supporting Files */,
 				9509929517CCDBBE00E7EBF7 /* 3rd Party */,
 			);
 			path = DotA2Soundboard;
