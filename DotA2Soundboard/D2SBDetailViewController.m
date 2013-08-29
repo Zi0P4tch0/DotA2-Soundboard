@@ -1,12 +1,8 @@
 #import "D2SBDetailViewController.h"
 
-#import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "D2SBAppDelegate.h"
 #import "BlockAlertView.h"
-#import "D2SBMasterViewController.h"
-#import "MBProgressHUD.h"
 
 @implementation D2SBDetailViewController {
     
@@ -80,7 +76,6 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:requestedClip inSection:0];
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
-        [TestFlight passCheckpoint:@"CLIP_PLAYED_FROM_URL"];
     }
 }
 
@@ -111,10 +106,6 @@
         [alert show];
         
         NSLog(@"Clip URL copied to clipboard: \"%@\".",urlString);
-        
-         #ifdef USE_TESTFLIGHT
-        [TestFlight passCheckpoint:@"URL_SHARE"];
-         #endif
     }
     
     if ([buttonTitle isEqualToString:NSLocalizedString(@"Save Clip", nil)])
@@ -133,10 +124,6 @@
         [alert show];
         
         NSLog(@"Clip saved to RINGTONES_DIR: \"%@\".",output);
-        
-         #ifdef USE_TESTFLIGHT
-        [TestFlight passCheckpoint:@"CLIP_SAVE"];
-         #endif
 
     }
     
@@ -149,10 +136,6 @@
         if ([[UIApplication sharedApplication] canOpenURL: whatsappURL])
         {
             [[UIApplication sharedApplication] openURL: whatsappURL];
-            
-             #ifdef USE_TESTFLIGHT
-            [TestFlight passCheckpoint:@"URL_SHARE_WHATSAPP"];
-             #endif
         }
         else
         {
@@ -186,12 +169,7 @@
             
             [alert show];
         }
-        else
-        {
-             #ifdef USE_TESTFLIGHT
-            [TestFlight passCheckpoint:@"CLIP_SHARE_WHATSAPP"];
-             #endif
-        }
+
     }
 }
 
@@ -295,7 +273,7 @@
         [player stop];
     }
     
-    NSString* clipFile =  [NSString stringWithFormat:@"%@clip.mp3", TMP_DIR];
+    NSString* clipFile = [TMP_DIR stringByAppendingPathComponent:@"clip.mp3"];
     [clipData writeToFile:clipFile atomically:NO];
     
     NSError *error;
@@ -365,7 +343,7 @@
     
     //Hero image
     UIImageView *heroImageView = (UIImageView*)[cell viewWithTag:102];
-    NSString *iconFile = [NSString stringWithFormat:@"%@%@.png",TMP_DIR,[soundboard name]];
+    NSString *iconFile = [NSString stringWithFormat:@"%@.png",[TMP_DIR stringByAppendingPathComponent:[soundboard name]]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:iconFile])
     {
@@ -413,10 +391,6 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.rowHeight = 80;
     tableView.bounces = NO;
-    
-     #ifdef USE_TESTFLIGHT
-    [TestFlight passCheckpoint:@"CLIP_SEARCH"];
-     #endif
     
 }
 

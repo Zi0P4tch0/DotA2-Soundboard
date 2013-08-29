@@ -76,9 +76,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="DotA 2 Soundboard" id="36">
-                        <barButtonItem key="leftBarButtonItem" image="piggy-bank.png" id="luu-ZW-tHQ">
+                        <barButtonItem key="leftBarButtonItem" image="piggy-bank.png" id="tIh-wR-V90">
                             <connections>
-                                <action selector="donate:" destination="12" id="Jjn-gM-PHS"/>
+                                <action selector="donate:" destination="12" id="WQL-xJ-YER"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="erH-Us-Y8t">
@@ -89,7 +89,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addSoundboardButton" destination="erH-Us-Y8t" id="Qxx-aM-WPn"/>
-                        <outlet property="donateButton" destination="luu-ZW-tHQ" id="Yd7-ze-ttZ"/>
+                        <outlet property="donateButton" destination="tIh-wR-V90" id="U6F-Yr-kpN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17" sceneMemberID="firstResponder"/>

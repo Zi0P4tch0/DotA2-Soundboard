@@ -74,9 +74,11 @@ typedef enum {
     [self reloadSoundboards];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     BOOL tutorialShown = [defaults boolForKey:@"tutorialShown"];
+    BOOL showTutorial = [defaults boolForKey:@"showTutorial"];
         
-    if (!tutorialShown)
+    if (!tutorialShown || showTutorial)
     {
         NSLog(@"Showing tutorial / Disabling \"addSoundboard\" & \"donate\" buttons");
         
@@ -98,10 +100,12 @@ typedef enum {
                                          title:NSLocalizedString(@"That's it!",nil)
                                          description:NSLocalizedString(@"Click on a soundboard to open it.\nA list of the available clips will appear.\n\nSearch a clip by scrolling down the list or using the top search bar.\n\nTo play a clip, just click on it!\n\nTo view clip sharing options, just hold your finger on a clip for 1-2 seconds.",nil)];
         
+        
         MYIntroductionPanel *panelFour = [[MYIntroductionPanel alloc]
                                           initWithimage:[UIImage imageNamed:@"piggy-bank"]
                                           title:nil
                                           description:NSLocalizedString(@"Hi there!\n\nI'm a 25yo fan of DotA2. I've created this App to spam heroes sounds to my friends.\n\nPlease help me paying servers and keeping my mug filled by donating.\n\nThank you, have fun!",nil)];
+         
     
         MYIntroductionView *introductionView = [[MYIntroductionView alloc]
                                                 initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
@@ -113,6 +117,8 @@ typedef enum {
         [introductionView showInView:self.view];
         
         [defaults setBool:YES forKey:@"tutorialShown"];
+        [defaults setBool:NO forKey:@"showTutorial"];
+        
         [defaults synchronize];
         
     }
@@ -120,9 +126,7 @@ typedef enum {
     {
         NSLog(@"No need to show tutorial");
     }
-    
-    [PayPalPaymentViewController setEnvironment:PayPalEnvironmentNoNetwork];
-    
+        
 }
 
 #pragma mark - Introduction view methods
@@ -257,10 +261,6 @@ typedef enum {
                                         
                                     });
                                     
-                                        #ifdef USE_TESTFLIGHT
-                                    [TestFlight passCheckpoint:@"DOWNLOAD_SOUNDBOARD"];
-                                        #endif
-                                    
                                     if (weakRequestParameters)
                                     {
                                         [weakSelf reloadSoundboards];
@@ -373,9 +373,6 @@ typedef enum {
         NSString *targetSoundboard = [[_soundboards objectAtIndex:indexPath.row] file];
         
         NSLog(@"User deleted \"%@\" soundboard.",targetSoundboard);
-         #ifdef USE_TESTFLIGHT
-        [TestFlight passCheckpoint:@"REMOVE_SOUNDBOARD"];
-         #endif
         
         [[NSFileManager defaultManager] removeItemAtPath:targetSoundboard error:NULL];
                 
@@ -429,7 +426,7 @@ typedef enum {
     
     //Hero Image
     UIImageView *heroImageView = (UIImageView*)[cell viewWithTag:102];
-    NSString *iconFile = [NSString stringWithFormat:@"%@%@.png",TMP_DIR,[soundboard name]];
+    NSString *iconFile = [NSString stringWithFormat:@"%@.png",[TMP_DIR stringByAppendingPathComponent:[soundboard name]]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:iconFile])
     {
@@ -496,50 +493,9 @@ typedef enum {
 
 -(IBAction)donate:(id)sender
 {
-    PayPalPayment *payment = [[PayPalPayment alloc] init];
-    payment.amount = [[NSDecimalNumber alloc] initWithString:@"0.98"];
-    payment.currencyCode = @"GBP";
-    payment.shortDescription = @"D2SB Donation";
-    
-    if (!payment.processable)
-    {
-        return;
-    }
-    
-    [PayPalPaymentViewController setEnvironment:PayPalEnvironmentProduction];
-    
-    // Create a PayPalPaymentViewController with the credentials and payerId, the PayPalPayment
-    // from the previous step, and a PayPalPaymentDelegate to handle the results.
-    PayPalPaymentViewController *paymentViewController;
-    paymentViewController = [[PayPalPaymentViewController alloc]      initWithClientId:@"ARRoCBDLWOKiOwefhHiOMCopt1knP7bKr18jdlQCy7K8qQFoFxBU56dKWkyY"
-                                                                    receiverEmail:@"ispeakprogramming@gmail.com"
-                                                                          payerId:nil
-                                                                          payment:payment
-                                                                         delegate:self];
-    
-    // Present the PayPalPaymentViewController.
-    [self presentViewController:paymentViewController animated:YES completion:nil];
+    NSURL *url = [NSURL URLWithString:@"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QX3DRFKLPBBKU"];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
-- (void)payPalPaymentDidComplete:(PayPalPayment *)completedPayment {
-    
-    [self dismissViewControllerAnimated:YES completion:^(){
-        
-        BlockAlertView *alert = [[BlockAlertView alloc]
-                                 initWithTitle:NSLocalizedString(@"You're The Best!",nil)
-                                 message:NSLocalizedString(@"Many thanks for your donation.\nI wish you well!",nil)];
-        
-        [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", nil) imageIdentifier:@"gray" block:^(){}];
-        
-        [alert show];
-        
-    }];
-
-}
-
-- (void)payPalPaymentDidCancel {
-    // The payment was canceled; dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 @end

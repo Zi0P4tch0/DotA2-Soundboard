@@ -2,11 +2,10 @@
 
 #import "AFAmazonS3Client.h"
 #import "MYIntroductionView.h"
-#import "PayPalMobile.h"
 
 #define HEROES_NO 102
 
-@interface D2SBMasterViewController : UITableViewController <NSXMLParserDelegate,MYIntroductionDelegate,PayPalPaymentDelegate>
+@interface D2SBMasterViewController : UITableViewController <NSXMLParserDelegate,MYIntroductionDelegate>
 
 @property (nonatomic,strong) IBOutlet UIBarButtonItem *addSoundboardButton;
 @property (nonatomic,strong) IBOutlet UIBarButtonItem *donateButton;

@@ -3,14 +3,16 @@
 #import "BlockAlertView.h"
 
 #include <dirent.h>
-#include <sys/stat.h>
 
 #define INIT_DIR(path) {                                                    \
     DIR *dir = opendir([path cStringUsingEncoding:NSASCIIStringEncoding]);  \
     if (dir) {                                                              \
         closedir(dir);                                                      \
     } else {                                                                \
-        mkdir([path cStringUsingEncoding:NSASCIIStringEncoding],0755);      \
+        [[NSFileManager defaultManager] createDirectoryAtPath:path          \
+                                        withIntermediateDirectories:NO      \
+                                        attributes:nil                      \
+                                        error:NULL];                        \
     }                                                                       \
 }
 
@@ -29,10 +31,13 @@
     #endif
     
     //Init directories
+#ifdef JAILBREAK
     INIT_DIR(BASE_DIR);
+    INIT_DIR(TMP_DIR);
+#endif
     INIT_DIR(SOUNDBOARDS_DIR);
     INIT_DIR(RINGTONES_DIR);
-    INIT_DIR(TMP_DIR);
+
     
     //Delete temporary files
     NSError *error = nil;
@@ -47,11 +52,14 @@
         for (NSString *file in tmpFiles)
         {
             error = nil;
-            NSLog(@"Deleting temporary file: \"%@\"...",file);
             [fileManager removeItemAtPath:file error:&error];
             if (error)
             {
                 NSLog(@"Error while removing temporary file \"%@\": \"%@\".",file,[error localizedDescription]);
+            }
+            else
+            {
+                 NSLog(@"Removing temporary file: \"%@\"...",file);
             }
         }
     }

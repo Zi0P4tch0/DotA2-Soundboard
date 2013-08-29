@@ -49,3 +49,16 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#define JAILBREAK
+
+#ifdef JAILBREAK
+    #define BASE_DIR @"/var/mobile/Library/D2SB"
+    #define TMP_DIR @"/tmp/D2SB"
+#else
+    #define BASE_DIR [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+    #define TMP_DIR NSTemporaryDirectory()
+#endif
+
+#define SOUNDBOARDS_DIR [BASE_DIR stringByAppendingPathComponent:@"Soundboards"]
+#define RINGTONES_DIR [BASE_DIR stringByAppendingPathComponent:@"Ringtones"]
