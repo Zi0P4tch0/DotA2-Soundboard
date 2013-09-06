@@ -1,3 +1,22 @@
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+// This file is part of DotA2 Soundboard.                                    //
+//                                                                           //
+// DotA2 Soundboard is free software: you can redistribute it and/or modify  //
+// it under the terms of the GNU General Public License as published by      //
+// the Free Software Foundation, either version 3 of the License, or         //
+// (at your option) any later version.                                       //
+//                                                                           //
+// DotA2 Soundboard is distributed in the hope that it will be useful,       //
+// but WITHOUT ANY WARRANTY; without even the implied warranty of            //
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             //
+// GNU General Public License for more details.                              //
+//                                                                           //
+// You should have received a copy of the GNU General Public License         //
+// along with DotA2 Soundboard.  If not, see <http://www.gnu.org/licenses/>. //
+//                                                                           //
+///////////////////////////////////////////////////////////////////////////////
+
 #import "D2SBMasterViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -71,7 +90,16 @@ typedef enum {
     _xmlParserMode = HEROES_XML;
     [xmlParser parse];
     
-    [self reloadSoundboards];
+    //async
+    dispatch_queue_t queue = dispatch_queue_create("com.matteopacini.DotA2Soundboard", 0);
+    
+    self.navigationItem.title = @"Loading...";
+    
+    dispatch_async(queue, ^() {
+       
+        [self reloadSoundboards];
+        
+    });
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -80,8 +108,6 @@ typedef enum {
         
     if (!tutorialShown || showTutorial)
     {
-        NSLog(@"Showing tutorial / Disabling \"addSoundboard\" & \"donate\" buttons");
-        
         [addSoundboardButton setEnabled:NO];
         [donateButton setEnabled:NO];
         
@@ -122,19 +148,13 @@ typedef enum {
         [defaults synchronize];
         
     }
-    else
-    {
-        NSLog(@"No need to show tutorial");
-    }
         
 }
 
 #pragma mark - Introduction view methods
 
 -(void)introductionDidFinishWithType:(MYFinishType)finishType
-{
-    NSLog(@"End of tutorial / Enabling \"addSoundboard\" & \"donate\" button");
-    
+{    
     [addSoundboardButton setEnabled:YES];
     [donateButton setEnabled:YES];
 }
@@ -164,15 +184,12 @@ typedef enum {
 
 -(void)reloadSoundboards
 {
-    NSLog(@"Reloading soundboards...");
-    
     _soundboards = [[NSMutableArray alloc] init];
     
     //Announcer soundboard check
     NSString *announcerSoundboardPath = [SOUNDBOARDS_DIR stringByAppendingPathComponent:@"Announcer.sb"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:announcerSoundboardPath])
     {
-        NSLog(@"First start. Copying \"Announcer.sb\" to SOUNDBOARDS_DIR.");
         NSString *announcerSoundboardBundlePath = [[NSBundle mainBundle] pathForResource:@"Announcer" ofType:@"sb"];
         [[NSFileManager defaultManager] copyItemAtPath:announcerSoundboardBundlePath toPath:announcerSoundboardPath error:NULL];
     }
@@ -188,7 +205,6 @@ typedef enum {
             if ([Soundboard isValidSoundboard:[SOUNDBOARDS_DIR stringByAppendingPathComponent:file]])
             {
                 [_soundboards addObject:[[Soundboard alloc] initWithFile:[SOUNDBOARDS_DIR stringByAppendingPathComponent:file]]];
-                NSLog(@"Soundboard validated: %@",file);
             }
             else
             {
@@ -199,13 +215,15 @@ typedef enum {
         }
     }
     
-    [self.tableView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        [self.tableView reloadData];
+        self.navigationItem.title = @"DotA2 Soundboard";
+    });
+    
 }
 
 -(void)downloadSoundboard:(NSString*)heroName
 {
-    NSLog(@"Downloading soudboard for hero \"%@\"...",heroName);
-    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeAnnularDeterminate;
     hud.labelText = NSLocalizedString(@"Downloading, please wait...",nil);
@@ -228,8 +246,6 @@ typedef enum {
         
         __unsafe_unretained typeof(self) weakSelf = self;
         __unsafe_unretained typeof(NSArray*) weakRequestParameters = urlRequestParameters;
-
-        NSLog(@"Amazon S3 object path: \"%@\".",[NSString stringWithFormat:@"%@%@.sb",S3_BASE_URL,refinedValue]);
         
         [downloadOperation getObjectWithPath:[NSString stringWithFormat:@"/%@.sb",refinedValue]
                                 outputStream:[NSOutputStream outputStreamToFileAtPath:output append:NO]
@@ -251,8 +267,6 @@ typedef enum {
                                     isDownloading = NO;
                                     
                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                        
-                                        NSLog(@"Soundboard \"%@\" successfully downloaded!",[NSString stringWithFormat:@"%@.sb",refinedValue]);
                                         
                                         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                         [weakSelf reloadSoundboards];
@@ -371,8 +385,6 @@ typedef enum {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         NSString *targetSoundboard = [[_soundboards objectAtIndex:indexPath.row] file];
-        
-        NSLog(@"User deleted \"%@\" soundboard.",targetSoundboard);
         
         [[NSFileManager defaultManager] removeItemAtPath:targetSoundboard error:NULL];
                 
