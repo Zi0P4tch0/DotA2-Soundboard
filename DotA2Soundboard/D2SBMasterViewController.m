@@ -90,7 +90,7 @@ typedef enum {
     _xmlParserMode = HEROES_XML;
     [xmlParser parse];
     
-    //async
+    //Async loading
     dispatch_queue_t queue = dispatch_queue_create("com.matteopacini.DotA2Soundboard", 0);
     
     self.navigationItem.title = @"Loading...";
@@ -218,6 +218,8 @@ typedef enum {
     dispatch_async(dispatch_get_main_queue(), ^(){
         [self.tableView reloadData];
         self.navigationItem.title = @"DotA2 Soundboard";
+        if (![donateButton isEnabled]) [donateButton setEnabled:YES];
+        if (![addSoundboardButton isEnabled]) [addSoundboardButton setEnabled:YES];
     });
     
 }
@@ -269,9 +271,17 @@ typedef enum {
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         
                                         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                        [weakSelf reloadSoundboards];
-                                        [weakSelf.addSoundboardButton setEnabled:YES];
-                                        [weakSelf.donateButton setEnabled:YES];
+                                        
+                                        dispatch_queue_t queue = dispatch_queue_create("com.matteopacini.DotA2Soundboard", 0);
+                                        
+                                        self.navigationItem.title = @"Loading...";
+                                        
+                                        dispatch_async(queue, ^() {
+                                            
+                                            [self reloadSoundboards];
+                                            
+                                        });
+                                        
                                         
                                     });
                                     

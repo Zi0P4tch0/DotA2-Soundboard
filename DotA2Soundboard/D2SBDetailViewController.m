@@ -278,7 +278,7 @@
     }
     
     NSString* clipFile = [TMP_DIR stringByAppendingPathComponent:@"clip.mp3"];
-    [clipData writeToFile:clipFile atomically:NO];
+    [clipData writeToFile:clipFile atomically:YES];
     
     NSError *error;
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:clipFile] error:&error];
@@ -352,7 +352,7 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:iconFile])
     {
         NSData *iconData = [soundboard iconData];
-        [iconData writeToFile:iconFile atomically:NO];
+        [iconData writeToFile:iconFile atomically:YES];
     }
     
     [heroImageView setImage:[UIImage imageWithContentsOfFile:iconFile]];
